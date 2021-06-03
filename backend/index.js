@@ -10,11 +10,7 @@ const app = express();
 app.use( express.static('public') );
 
 //rutas 
-// app.get('/', (req, res) => {
-//     res.json({
-//         ok: true
-//     })
-// })
+app.use('/auth', require('./routes/auth') );
 
 
 

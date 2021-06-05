@@ -5,19 +5,31 @@ const Usuario = require('../models/Usuario');
 const crearUsuario = async(req, res = response ) => {
         //console.log(req.body);
 
-        const { nombre, email, password } = req.body;
+        const { email } = req.body;
 
 
         try {
-            const usuario = new Usuario( req.body );
+
+            //busca en la bd si hay un usuario con el mismo email
+            let usuario = await Usuario.findOne({ email });
+            //si hay un usuario con el mismo email tira un error
+            if( usuario ) {
+                return res.status(400).json({ 
+                    ok: false,
+                    msg: 'Un usuario ya existe con ese email'
+                })
+            }
+
+            usuario = new Usuario( req.body );
             await usuario.save();
 
             res.status(201).json({
                 ok:true,
                 msg: 'registro exitoso',
-                nombre, 
-                email, 
-                password
+                uid: usuario.id,
+                nombre: usuario.nombre
+
+               
             })
 
         } catch (error) {

@@ -1,6 +1,8 @@
 const {response} = require('express');
 bcrypt = require('bcryptjs');
 const Usuario = require('../models/Usuario');
+const { generarJWT } = require('../helpers/jwt');
+
 
 
 
@@ -31,11 +33,15 @@ const crearUsuario = async(req, res = response ) => {
 
             await usuario.save();
 
+            //generar JWT
+            const token = await generarJWT( usuario.id, usuario.nombre );
+
             res.status(201).json({
                 ok:true,
                 msg: 'registro exitoso',
                 uid: usuario.id,
-                nombre: usuario.nombre
+                nombre: usuario.nombre,
+                token
 
                
             })
@@ -52,16 +58,48 @@ const crearUsuario = async(req, res = response ) => {
    
 }
 
-const login = (req, res = response) => {
+const login = async(req, res = response) => {
 
     const { email, password } = req.body
 
-    res.json({
-        ok:true,
-        msg: 'Login',
-        email,
-        password
-    })
+    try {
+        //busca en la bd si hay un usuario con el mismo email
+        const usuario = await Usuario.findOne({ email });
+        //si no existe un usuario con el mismo email tira un error
+        if( !usuario ) {
+            return res.status(400).json({ 
+                ok: false,
+                msg: 'No existe ningun usuario con ese email'
+            })
+        }
+        //confirmar los passwords
+        const validarPassword = bcrypt.compareSync( password, usuario.password );
+
+        //si no es el mismo password tira error
+        if ( !validarPassword ) {
+            return res.status(400).json({
+                ok:false,
+                msg: 'Password incorrecto'
+            })
+        }
+        //generar JWT
+        const token = await generarJWT( usuario.id, usuario.nombre );
+
+        res.json({
+            ok: true,
+            uid: usuario.id,
+            name: usuario.nombre,
+            token
+        })
+
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Porfavor hable con el administrador'
+        })
+    }
 }
 
 

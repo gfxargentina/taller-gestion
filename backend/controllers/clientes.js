@@ -11,6 +11,8 @@ const getClientes = ( req, res = response ) => {
 
 //crear cliente
 const crearCliente = ( req, res = response ) => {
+    //verificar que llega el cliente del req
+    console.log(req.body);
 
     res.status(200).json({
         ok: true,

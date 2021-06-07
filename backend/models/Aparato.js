@@ -9,7 +9,7 @@ const AparatoSchema = Schema({
     },
     aparato: {
         type: String,
-        require: true
+        required: true
     },
     falla: {
         type: String
@@ -22,7 +22,8 @@ const AparatoSchema = Schema({
     },
     user: {
         type: Schema.Types.ObjectId,
-        ref: 'Cliente'
+        ref: 'Cliente', 
+        required:true
     }
 
 });

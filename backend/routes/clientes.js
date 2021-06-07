@@ -5,10 +5,13 @@
 
 const { Router } = require('express');
 const router = Router();
+const { check } = require('express-validator');
 
 
 const { getClientes, crearCliente, actualizarCliente, eliminarCliente } = require('../controllers/clientes');
+const { validarCampos } = require('../middlewares/validar-campos');
 const { validarJWT } = require('../middlewares/validar-jwt');
+
 
 //validar todas las rutas con el middleware JWT
 router.use( validarJWT );
@@ -18,7 +21,16 @@ router.use( validarJWT );
 router.get('/', getClientes );
 
 //crear un nuevo cliente
-router.post('/', crearCliente );
+router.post('/', [
+    check('dni', 'El DNI es obligatorio').not().isEmpty(),
+    check('nombre', 'El nombre es obligatorio').not().isEmpty(),
+    check('apellido', 'El apellido es obligatorio').not().isEmpty(),
+    check('telefono', 'El telefono es obligatorio').not().isEmpty(),
+    check('email', 'El email no es correcto').isEmail(),
+    check('domicilio', 'El domicilio es obligatorio').not().isEmpty(),
+    validarCampos
+    
+], crearCliente );
 
 //actualizar cliente
 router.put('/:id', actualizarCliente );

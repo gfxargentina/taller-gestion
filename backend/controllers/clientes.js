@@ -1,4 +1,6 @@
 const { response } = require('express');
+const Cliente = require('../models/Cliente');
+
 
 //obtener todos los clientes
 const getClientes = ( req, res = response ) => {
@@ -10,14 +12,33 @@ const getClientes = ( req, res = response ) => {
 }
 
 //crear cliente
-const crearCliente = ( req, res = response ) => {
+const crearCliente = async( req, res = response ) => {
     //verificar que llega el cliente del req
-    console.log(req.body);
+    //console.log(req.body);
 
-    res.status(200).json({
-        ok: true,
-        msg: 'Crear Cliente'
-    })
+    const cliente = new Cliente( req.body );
+
+    try {
+
+        cliente.user = req.uid;
+        const clienteGuardado = await cliente.save();
+
+        res.status(201).json({
+            ok: true,
+            msg: 'Cliente guardado en la db',
+            cliente: clienteGuardado
+        })
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        });
+    }
+
+
+    
 }
 
 //actualizar cliente

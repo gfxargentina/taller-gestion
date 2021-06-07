@@ -5,7 +5,7 @@ const ClienteSchema = Schema({
         type: Number,
         require: true
     },
-    nombe: {
+    nombre: {
         type: String,
         require: true
     },

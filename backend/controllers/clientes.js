@@ -36,9 +36,6 @@ const crearCliente = async( req, res = response ) => {
             msg: 'Hable con el administrador'
         });
     }
-
-
-    
 }
 
 //actualizar cliente
@@ -58,7 +55,6 @@ const eliminarCliente = ( req, res = response ) => {
         msg: 'Eliminar Cliente'
     })
 }
-
 
 
 module.exports = { 

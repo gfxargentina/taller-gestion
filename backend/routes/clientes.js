@@ -38,4 +38,6 @@ router.put('/:id', actualizarCliente );
 //borrar cliente
 router.delete('/:id', eliminarCliente );
 
+
+
 module.exports = router;

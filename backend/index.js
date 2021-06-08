@@ -26,6 +26,7 @@ app.use( express.json() );
 //rutas 
 app.use('/auth', require('./routes/auth') );
 app.use('/clientes', require('./routes/clientes') );
+app.use('/aparatos', require('./routes/aparatos'));
 
 
 

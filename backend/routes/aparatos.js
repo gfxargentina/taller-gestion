@@ -12,6 +12,7 @@ const { validarJWT } = require('../middlewares/validar-jwt');
 //validar todas las rutas con el middleware JWT
 router.use( validarJWT );
 
+//TODO: el check
 router.post('/nuevo', nuevoAparato);
 
 

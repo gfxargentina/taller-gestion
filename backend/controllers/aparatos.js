@@ -14,21 +14,22 @@ const nuevoAparato = async( req, res = response ) => {
         
 
     try {
-        //trae el id del cliente
+        //trae el id del cliente y lo guarda en aparato modela
          aparato.cliente = req.params.id;
         //console.log(req.params.id)
          const aparatoGuardado = await aparato.save();
 
      
-         //TODO: como hacer que guarde el id del aparato en Clientes
-         //Cliente.aparatos = Cliente.aparatos.concat(aparatoGuardado._id);
-         //await Cliente.save();
+        //actualiza el cliente con el nuevo aparato ingresado
+         const id = req.params.id;
+         await Cliente.findByIdAndUpdate(id, { $push: { aparatos: aparatoGuardado._id } } )
          
 
           res.status(201).json({
             ok: true,
             msg: 'Aparato guardado',
-            aparato: aparatoGuardado
+            aparato: aparatoGuardado,
+            
         })
 
         

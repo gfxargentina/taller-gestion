@@ -45,8 +45,7 @@ const nuevoAparato = async( req, res = response ) => {
 //obtener todos los aparatos
 const getAparatos = async( req , res = response ) => {
 
-     const aparatos = await Aparato.find()
-                                   .populate('cliente', 'nombre apellido');
+     const aparatos = await Aparato.find();
 
     
 

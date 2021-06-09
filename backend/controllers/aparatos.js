@@ -14,7 +14,7 @@ const nuevoAparato = async( req, res = response ) => {
         
 
     try {
-        //trae el id del cliente y lo guarda en aparato modela
+        //trae el id del cliente y lo guarda en la coleccion aparato 
          aparato.cliente = req.params.id;
         //console.log(req.params.id)
          const aparatoGuardado = await aparato.save();

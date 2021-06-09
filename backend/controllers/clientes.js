@@ -3,11 +3,14 @@ const Cliente = require('../models/Cliente');
 
 
 //obtener todos los clientes
-const getClientes = ( req, res = response ) => {
+const getClientes = async( req, res = response ) => {
+
+    const clientes = await Cliente.find({}).populate('aparatos')
 
     res.status(200).json({
         ok: true,
-        msg: 'Devuelve todos los clientes'
+        msg: 'Devuelve todos los clientes y sus aparatos',
+        clientes
     })
 }
 

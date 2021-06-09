@@ -1,19 +1,30 @@
 const { response } = require('express');
 const Aparato = require('../models/Aparato');
+const Cliente = require('../models/Cliente');
+
+
 
 
 //ingresar nuevo aparato
 const nuevoAparato = async( req, res = response ) => {
     //console.log(req.body)
+    //console.log(res)
 
     const aparato = new Aparato(req.body);
-    //console.log(aparato)
+        
 
     try {
-        aparato.cliente = req.uid;
-        const aparatoGuardado = await aparato.save();
+        //trae el id del cliente
+         aparato.cliente = req.params.id;
+        //console.log(req.params.id)
+         const aparatoGuardado = await aparato.save();
 
-        res.status(201).json({
+         //TODO: como hacer que guarde el id del aparato en Clientes
+         //Cliente.aparatos = Cliente.aparatos.concat(aparatoGuardado._id);
+         await Cliente.save();
+         
+
+          res.status(201).json({
             ok: true,
             msg: 'Aparato guardado',
             aparato: aparatoGuardado
@@ -26,13 +37,26 @@ const nuevoAparato = async( req, res = response ) => {
             ok: false,
             msg: 'Hable con el administrador'
         })
-        
     }
+}
 
+//obtener todos los aparatos
+const getAparatos = async( req , res = response ) => {
+
+     const aparatos = await Aparato.find()
+                                   .populate('cliente', 'nombre apellido');
+
+    
+
+    res.status(200).json({
+        ok: true,
+        aparatos
+    })
 }
 
 
 
 module.exports = {
-    nuevoAparato
+    nuevoAparato,
+    getAparatos
 }

@@ -30,10 +30,14 @@ const ClienteSchema = Schema({
         type: Date,
         default: Date.now
     },
+    aparatos: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Aparato'
+    }
+    ],
     user: {
         type: Schema.Types.ObjectId,
         ref: 'Usuario',
-        required: true
     }
     
 

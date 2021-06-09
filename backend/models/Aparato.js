@@ -23,7 +23,6 @@ const AparatoSchema = Schema({
     cliente: {
         type: Schema.Types.ObjectId,
         ref: 'Cliente', 
-        required:true
     }
 
 });

@@ -23,8 +23,7 @@ router.get('/', getClientes );
 //crear un nuevo cliente
 router.post('/', [
     check('dni', 'El DNI es obligatorio').not().isEmpty(),
-    check('nombre', 'El nombre es obligatorio').not().isEmpty(),
-    check('apellido', 'El apellido es obligatorio').not().isEmpty(),
+    check('nombreApellido', 'El nombre y apellido son obligatorios').not().isEmpty(),
     check('telefono', 'El telefono es obligatorio').not().isEmpty(),
     check('email', 'El email no es correcto').isEmail(),
     check('domicilio', 'El domicilio es obligatorio').not().isEmpty(),

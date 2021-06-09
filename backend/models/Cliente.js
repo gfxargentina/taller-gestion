@@ -6,11 +6,7 @@ const ClienteSchema = Schema({
         required: true,
         unique: true
     },
-    nombre: {
-        type: String,
-        required: true
-    },
-    apellido: {
+    nombreApellido: {
         type: String,
         required: true
     },

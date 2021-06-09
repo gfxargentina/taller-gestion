@@ -19,9 +19,9 @@ const nuevoAparato = async( req, res = response ) => {
         //console.log(req.params.id)
          const aparatoGuardado = await aparato.save();
 
-        
+     
          //TODO: como hacer que guarde el id del aparato en Clientes
-         //cliente.aparatos = Cliente.aparatos.concat(aparatoGuardado._id);
+         //Cliente.aparatos = Cliente.aparatos.concat(aparatoGuardado._id);
          //await Cliente.save();
          
 

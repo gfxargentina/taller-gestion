@@ -32,7 +32,14 @@ router.post('/', [
 ], crearCliente );
 
 //actualizar cliente
-router.put('/:id', actualizarCliente );
+router.put('/:id', [
+    check('dni', 'El DNI es obligatorio').not().isEmpty(),
+    check('nombreApellido', 'El nombre y apellido son obligatorios').not().isEmpty(),
+    check('telefono', 'El telefono es obligatorio').not().isEmpty(),
+    check('email', 'El email no es correcto').isEmail(),
+    check('domicilio', 'El domicilio es obligatorio').not().isEmpty(),
+    validarCampos
+], actualizarCliente );
 
 //borrar cliente
 router.delete('/:id', eliminarCliente );

@@ -17,6 +17,12 @@ const AparatoSchema = Schema({
     presupuesto: {
         type: String
     },
+    precio: {
+        type: String
+    },
+    observaciones: {
+        type: String
+    },
     garantia: {
         type: String
     },

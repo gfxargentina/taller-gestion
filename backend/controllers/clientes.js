@@ -80,10 +80,6 @@ const actualizarCliente = async( req, res = response ) => {
         })
 
 
-
-
-
-
     } catch (error) {
         console.log(error);
         res.status(500).json({
@@ -94,13 +90,46 @@ const actualizarCliente = async( req, res = response ) => {
 }
 
 //eliminar cliente
-const eliminarCliente = ( req, res = response ) => {
+const eliminarCliente = async( req, res = response ) => {
 
-    
-    res.status(200).json({
-        ok: true,
-        msg: 'Eliminar Cliente'
-    })
+    const clienteId = req.params.id;
+    const uid = req.uid;
+
+    try {
+        //busca el cliente en la db
+        const cliente = await Cliente.findById( clienteId );
+
+        if( !cliente ) {
+            res.status(404).json({
+                ok: false,
+                msg: 'No existe ningun cliente con ese id'
+            })
+        }
+        //verificar que sea el mismo usuario el que quiere realizar los cambios
+        if ( cliente.user.toString() !== uid ) {
+            return res.status(401).json({
+                ok: false,
+                msg: 'No esta autorizado a eliminar este cliente'
+            });
+        }
+
+        
+        
+        // Elimina el cliente
+        await Cliente.findByIdAndDelete( clienteId );
+        res.json({
+            ok: true,
+            msg: 'Cliente eliminado'
+        })
+
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        });
+    }
 }
 
 

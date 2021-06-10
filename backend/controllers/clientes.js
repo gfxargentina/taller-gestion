@@ -43,17 +43,60 @@ const crearCliente = async( req, res = response ) => {
 }
 
 //actualizar cliente
-const actualizarCliente = ( req, res = response ) => {
+const actualizarCliente = async( req, res = response ) => {
 
-    res.status(200).json({
-        ok: true,
-        msg: 'actualizar Cliente'
-    })
+    const clienteId = req.params.id;
+    const uid = req.uid;
+
+    try {
+        //busca el cliente en la db
+        const cliente = await Cliente.findById( clienteId );
+
+        if( !cliente ) {
+            res.status(404).json({
+                ok: false,
+                msg: 'No existe ningun cliente con ese id'
+            })
+        }
+        //verificar que sea el mismo usuario el que quiere realizar los cambios
+        if ( cliente.user.toString() !== uid ) {
+            return res.status(401).json({
+                ok: false,
+                msg: 'No esta autorizado a editar este cliente'
+            });
+        }
+
+        const clienteEditado = { 
+            ...req.body,
+            user: uid
+        }
+
+        //busca el cliente para actualizar, findByIdUpdate recibe el id, los nuevos datos, y
+        //devuelve el nuevo cliente actualizado con new: true en la response
+        const clienteActualizado = await Cliente.findByIdAndUpdate( clienteId, clienteEditado, { new: true } );
+        res.json({
+            ok: true,
+            clienteActualizado
+        })
+
+
+
+
+
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        });
+    }
 }
 
 //eliminar cliente
 const eliminarCliente = ( req, res = response ) => {
 
+    
     res.status(200).json({
         ok: true,
         msg: 'Eliminar Cliente'

@@ -17,8 +17,12 @@ const nuevoAparato = async( req, res = response ) => {
         
          //trae el id del cliente y lo guarda en la coleccion aparato 
          aparato.cliente = req.params.id;
-         //console.log(req.params.id)
-          const aparatoGuardado = await aparato.save();
+
+         //trae el uid del usuario y lo guarda en la coleccion aparato
+         aparato.user = req.uid;
+
+         //guarda el aparato
+         const aparatoGuardado = await aparato.save();
           
           //actualiza el cliente con el nuevo aparato ingresado
          const id = req.params.id;
@@ -56,9 +60,58 @@ const getAparatos = async( req , res = response ) => {
     })
 }
 
+const actualizarAparato = async( req, res = response ) => {
+
+    const aparatoId = req.params.id;
+
+    //trae el uid del usuario
+    const uid = req.uid;
+
+    try {
+        //busca el aparato en la db por id
+        const aparato = await Aparato.findById( aparatoId );
+
+        if( !aparato ) {
+            res.status(404).json({
+                ok: false,
+                msg: 'No existe ningun aparato con ese id'
+            })
+        }
+        //verificar que sea el mismo usuario el que quiere realizar los cambios
+        if ( aparato.user.toString() !== uid ) {
+            return res.status(401).json({
+                ok: false,
+                msg: 'No esta autorizado a editar este cliente'
+            });
+        }
+
+        const aparatoEditado = { 
+            ...req.body,
+            user: uid
+        }
+
+        //busca el aparato para actualizar, findByIdAndUpdate recibe el id, los nuevos datos, y
+        //devuelve el nuevo aparato actualizado con new: true en la response
+        const aparatoActualizado = await Aparato.findByIdAndUpdate( aparatoId, aparatoEditado, { new: true } );
+        res.json({
+            ok: true,
+            aparatoActualizado
+        })
+
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        });
+    }
+}
+
 
 
 module.exports = {
     nuevoAparato,
-    getAparatos
+    getAparatos,
+    actualizarAparato
 }

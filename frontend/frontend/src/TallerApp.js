@@ -4,8 +4,7 @@ import { AppRouter } from './router/AppRouter'
 
 export const TallerApp = () => {
     return (
-        <div>
-            <h1>GESTION TALLER</h1>
+        <div>            
             <AppRouter />
         </div>
     )

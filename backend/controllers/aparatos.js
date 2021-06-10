@@ -60,6 +60,7 @@ const getAparatos = async( req , res = response ) => {
     })
 }
 
+//Actualizar Aparato
 const actualizarAparato = async( req, res = response ) => {
 
     //id del aparato a actualizar
@@ -73,7 +74,7 @@ const actualizarAparato = async( req, res = response ) => {
         const aparato = await Aparato.findById( aparatoId );
 
         if( !aparato ) {
-            res.status(404).json({
+            return res.status(404).json({
                 ok: false,
                 msg: 'No existe ningun aparato con ese id'
             })
@@ -110,10 +111,56 @@ const actualizarAparato = async( req, res = response ) => {
     }
 }
 
+// Borrar aparato
+const eliminarAparato = async( req, res = response ) => {
+
+    //id del aparato a eliminar
+    const aparatoId = req.params.id;
+
+    //trae el uid del usuario
+    const uid = req.uid;
+
+    try {
+        //busca el aparato en la db por id
+        const aparato = await Aparato.findById( aparatoId );
+
+        if( !aparato ) {
+            return res.status(404).json({
+                ok: false,
+                msg: 'No existe ningun aparato con ese id'
+            })
+        }
+        //verificar que sea el mismo usuario el que quiere realizar los cambios
+        if ( aparato.user.toString() !== uid ) {
+            return res.status(401).json({
+                ok: false,
+                msg: 'No esta autorizado a eliminar este aparato'
+            });
+        }
+
+        //elimina el aparato
+        await Aparato.findByIdAndDelete( aparatoId );
+
+        res.json({
+            ok: true,
+            msg: 'Aparato eliminado'
+        })
+
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            ok: false,
+            msg: 'Hable con el administrador'
+        });
+    }
+}
+
 
 
 module.exports = {
     nuevoAparato,
     getAparatos,
-    actualizarAparato
+    actualizarAparato,
+    eliminarAparato
 }

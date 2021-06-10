@@ -6,7 +6,7 @@
 const { Router } = require('express');
 const router = Router();
 const { check } = require('express-validator');
-const { nuevoAparato, getAparatos,actualizarAparato } = require('../controllers/aparatos');
+const { nuevoAparato, getAparatos,actualizarAparato, eliminarAparato } = require('../controllers/aparatos');
 const { validarCampos } = require('../middlewares/validar-campos');
 const { validarJWT } = require('../middlewares/validar-jwt');
 
@@ -33,6 +33,9 @@ router.put('/actualizar/:id', [
     validarCampos
 
 ], actualizarAparato );
+
+//eliminadr aparato
+router.delete('/borrar/:id', eliminarAparato );
 
 
 module.exports = router;

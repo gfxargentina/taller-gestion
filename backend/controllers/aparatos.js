@@ -62,6 +62,7 @@ const getAparatos = async( req , res = response ) => {
 
 const actualizarAparato = async( req, res = response ) => {
 
+    //id del aparato a actualizar
     const aparatoId = req.params.id;
 
     //trae el uid del usuario
@@ -85,6 +86,7 @@ const actualizarAparato = async( req, res = response ) => {
             });
         }
 
+        //datos actualizados
         const aparatoEditado = { 
             ...req.body,
             user: uid

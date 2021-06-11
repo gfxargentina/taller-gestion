@@ -7,7 +7,9 @@ import {
     Switch,
   } from "react-router-dom";
 import { LoginScreen } from '../components/auth/LoginScreen';
+import { RegisterScreen } from '../components/auth/RegisterScreen';
 import { TallerScreen } from '../components/taller/TallerScreen';
+
 
 export const AppRouter = () => {
     return (
@@ -16,6 +18,7 @@ export const AppRouter = () => {
                <Switch>
                     <Route exact path="/login" component={LoginScreen} />
                     <Route exact path="/" component={TallerScreen} />
+                    <Route exact path="/register" component={RegisterScreen} />
 
                     <Redirect to="/" />
                     

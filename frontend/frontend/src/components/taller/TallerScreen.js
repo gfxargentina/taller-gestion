@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
+import { Navbar }from '../ui/Navbar';
 
 export const TallerScreen = () => {
     return (
         <div>
-            <h1 className="font-bold">Taller Screen</h1>
+            <Navbar />
         </div>
     )
 }

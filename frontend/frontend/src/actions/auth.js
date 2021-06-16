@@ -34,7 +34,7 @@ export const startRegister = ( nombre , email, password ) => {
     return async( dispatch ) => {
         const resp = await fetchSinToken( 'auth/new', { nombre, email, password }, 'POST' );
         const body = await resp.json();
-        console.log(body)
+        //console.log(body)
 
         if( body.ok ) {
             localStorage.setItem('token', body.token );

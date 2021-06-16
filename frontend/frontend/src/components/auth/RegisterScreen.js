@@ -1,8 +1,34 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import Swal from 'sweetalert2'
+import { startRegister } from '../../actions/auth'
+import { useForm } from '../../hooks/useForm'
+
 
 
 export const RegisterScreen = () => {
+
+    const dispatch = useDispatch();
+
+    const [ formRegister, handleRegisterInput ] = useForm({
+        registerName: 'Luis',
+        registerEmail: 'luis@gmail.com',
+        registerPassword1: '12345678',
+        registerPassword2: '12345678'
+    })
+
+    const { registerName, registerEmail, registerPassword1, registerPassword2 } = formRegister;
+
+    const handleRegister = (e) => {
+        e.preventDefault();
+        //console.log(formRegister)
+
+        if( registerPassword1 !== registerPassword2 ){
+            return Swal.fire('Error', 'Las contraseñas deben de ser iguales', 'error')
+        }        
+        dispatch( startRegister( registerName, registerEmail, registerPassword1 ) );
+    }
     return (
         <>
           <section className="flex flex-col md:flex-row h-screen items-center">
@@ -19,23 +45,57 @@ export const RegisterScreen = () => {
 
                     <h1 className="text-xl md:text-2xl font-bold leading-tight mt-12">Registre una nueva cuenta</h1>
 
-                    <form className="mt-6" action="#" method="POST">
+                    <form className="mt-6" onSubmit={ handleRegister }>
                     <div className="mb-4">
                         <label className="block text-gray-700">Nombre y Apellido</label>
-                        <input type="text" name="nombre" id="" placeholder="ingrese su nombre y apellido" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus autocomplete required />
+                        <input 
+                            type="text" 
+                            name="registerName"
+                            value={ registerName }
+                            onChange={ handleRegisterInput }
+                            placeholder="ingrese su nombre y apellido" 
+                            class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus autocomplete required />
                     </div>   
                     <div>
                         <label className="block text-gray-700">Email</label>
-                        <input type="email" name="" id="" placeholder="ingrese su email" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus autocomplete required />
+                        <input 
+                            type="email" 
+                            name="registerEmail" 
+                            value={ registerEmail }
+                            onChange={ handleRegisterInput }
+                            placeholder="ingrese su email" 
+                            class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus autocomplete required />
                     </div>
 
                     <div class="mt-4">
                         <label className="block text-gray-700">Contraseña</label>
-                        <input type="password" name="" id="" placeholder="ingrese su contraseña" minlength="6" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
+                        <input 
+                            type="password" 
+                            name="registerPassword1"
+                            value={ registerPassword1 } 
+                            onChange={ handleRegisterInput }
+                            placeholder="ingrese su contraseña" 
+                            minlength="6" 
+                            class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
                             focus:bg-white focus:outline-none" required />
-                    </div>                    
+                    </div>
 
-                    <button type="submit" className="w-full block bg-indigo-500 hover:bg-indigo-400 focus:bg-indigo-400 text-white font-semibold rounded-lg
+                    <div class="mt-4">
+                        <label className="block text-gray-700">Reescribir Contraseña</label>
+                        <input 
+                            type="password" 
+                            name="registerPassword2"
+                            value={ registerPassword2 } 
+                            onChange={ handleRegisterInput }
+                            placeholder="ingrese su contraseña" 
+                            minlength="6" 
+                            class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
+                            focus:bg-white focus:outline-none" required />
+                    </div>                     
+
+                    <button 
+                        type="submit" 
+                        className="w-full block bg-indigo-500 hover:bg-indigo-400 focus:bg-indigo-400 text-white font-semibold rounded-lg
                             px-4 py-3 mt-6">Registrar</button>
                     </form>
 

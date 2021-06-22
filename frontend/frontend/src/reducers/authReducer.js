@@ -25,6 +25,12 @@ export const authReducer = ( state = initialState, action ) => {
             return {
                 checking: false
             }
+
+        case types.authClientes:
+            return {
+                ...state,
+                checking: false
+            }
             
         default:
             return state;

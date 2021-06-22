@@ -81,6 +81,7 @@ const login = ( user ) => ({
     payload: user
 })
 
+
 //funcion para salir
 export const startLogout = () => {
     return ( dispatch ) => {

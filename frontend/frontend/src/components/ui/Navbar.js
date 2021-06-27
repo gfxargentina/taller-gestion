@@ -3,6 +3,7 @@ import { Disclosure, Menu } from '@headlessui/react'
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import { useDispatch, useSelector } from 'react-redux'
 import { startLogout } from '../../actions/auth'
+import logo from '../../img/taller.png'
 
 const navigation = ['Inicio', 'Clientes', 'Aparatos', 'Reportes']
 const profile = ['Tu perfil', 'configuración', 'Salir']
@@ -31,7 +32,7 @@ export const Navbar = () => {
                         <div className="flex-shrink-0">
                             <img
                             className="h-8 w-8"
-                            src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
+                            src={ logo }
                             alt="Workflow"
                             />
                         </div>

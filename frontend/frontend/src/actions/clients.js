@@ -18,7 +18,7 @@ export const startGetClients = () => {
            
 
             dispatch ( clientsLoaded( clients ));
-
+            
 
         } catch (error) {
             console.log(error)
@@ -31,5 +31,7 @@ const clientsLoaded = ( clients ) => ({
     type: types.clientGetAll,
     payload: clients
 })
+
+
 
 

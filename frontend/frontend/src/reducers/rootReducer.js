@@ -6,5 +6,5 @@ import { clientReducer } from './clientReducer';
 
 export const rootReducer = combineReducers({
     auth: authReducer,
-    clients: clientReducer
+    clientes: clientReducer,
 })

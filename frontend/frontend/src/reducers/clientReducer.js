@@ -3,7 +3,8 @@ import { types } from "../types/types";
 
 
 const initialState = { 
-    clients: []
+    clients: [],
+    hayClientes: null
 }
 
 export const clientReducer = ( state = initialState, action ) => {
@@ -12,10 +13,12 @@ export const clientReducer = ( state = initialState, action ) => {
         case types.clientGetAll:
             return {
                 ...state,
-                cliente: [ ...action.payload ]
+                clients: [ ...action.payload ]
             }
+        
     
         default:
             return state;
     }
 }
+

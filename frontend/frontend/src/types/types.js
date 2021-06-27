@@ -12,6 +12,7 @@ export const types = {
     authLogout: '[auth] Logout',
 
     clientGetAll:'[client] get all clients',
+    
 
 
 

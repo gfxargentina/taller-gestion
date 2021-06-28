@@ -12,6 +12,8 @@ export const types = {
     authLogout: '[auth] Logout',
 
     clientGetAll:'[client] get all clients',
+    //inicializa el proceso de grabaciones
+    startNewClient:'[client] Start add new client',
     
 
 

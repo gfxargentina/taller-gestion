@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector} from 'react-redux';
 import { startGetClients } from '../../actions/clients';
 import { NoHayClientes } from './NoHayClientes';
-
+import {  Link } from "react-router-dom";
 
 
 
@@ -52,10 +52,15 @@ export const Clientes = () => {
           {
             ( clientes.length > 0 ) ? (
               <div>
-              <div className="flex flex-col container mx-auto">
+              <div className="flex flex-col container mx-auto">              
               <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                   <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                  <Link to="/nuevo-cliente">
+                  <button class="h-10 px-5 mt-5 mb-5 text-indigo-700 transition-colors duration-150 border border-indigo-500 rounded-lg focus:shadow-outline 
+                              hover:bg-indigo-500 hover:text-indigo-100">Nuevo Cliente</button>
+                  </Link>
+                  
                     <table className="min-w-full divide-y divide-gray-200">
                       <thead className="bg-gray-50">
                         <tr>
@@ -63,7 +68,7 @@ export const Clientes = () => {
                             scope="col"
                             className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                           >
-                            Nombre
+                            Apellido y nombre
                           </th>
                           <th
                             scope="col"

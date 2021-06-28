@@ -9,9 +9,12 @@ import {
 import { startchecking } from '../actions/auth';
 import { LoginScreen } from '../components/auth/LoginScreen';
 import { RegisterScreen } from '../components/auth/RegisterScreen';
+import { ScreenNuevoCliente } from '../components/taller/ScreenNuevoCliente';
 import { TallerScreen } from '../components/taller/TallerScreen';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
+
+
 
 
 export const AppRouter = () => {
@@ -42,6 +45,13 @@ export const AppRouter = () => {
                     <PrivateRoute 
                         exact path="/" 
                         component={TallerScreen}
+                        isAuthenticated={ !!uid } 
+
+                        />
+
+                    <PrivateRoute 
+                        exact path="/nuevo-cliente" 
+                        component={ ScreenNuevoCliente }
                         isAuthenticated={ !!uid } 
 
                         />

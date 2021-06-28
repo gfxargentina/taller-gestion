@@ -4,6 +4,7 @@ import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 import { useDispatch, useSelector } from 'react-redux'
 import { startLogout } from '../../actions/auth'
 import logo from '../../img/taller.png'
+import {  Link } from "react-router-dom";
 
 const navigation = ['Inicio', 'Clientes', 'Aparatos', 'Reportes']
 const profile = ['Tu perfil', 'configuración', 'Salir']
@@ -42,9 +43,12 @@ export const Navbar = () => {
                                 itemIdx === 0 ? (
                                 <Fragment key={item}>
                                     {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
-                                    <a href="ex" className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">
-                                    {item}
-                                    </a>
+                                    <Link to="/">
+                                        <a href="ex" className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">
+                                            {item}
+                                        </a>
+                                    </Link>
+                                    
                                 </Fragment>
                                 ) : (
                                 <a

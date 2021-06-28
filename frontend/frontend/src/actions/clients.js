@@ -3,6 +3,8 @@ import { types } from "../types/types";
 import { fetchConToken } from "../helpers/fetch";
 import { prepareDates } from "../helpers/prepareDates";
 
+
+
 export const startGetClients = () => {
     return async(dispatch) => {
         //verificar que llega ok
@@ -30,6 +32,45 @@ export const startGetClients = () => {
 const clientsLoaded = ( clients ) => ({
     type: types.clientGetAll,
     payload: clients
+})
+
+//accion para inicializar proceso de grabacion de nuevo cliente
+export const startAddNewClient = ( client ) => {
+    return async( dispatch, getState ) => {
+            console.log(client)
+
+            const { uid, name } = getState().auth;
+
+            try {
+                const resp = await fetchConToken( 'clientes', client , 'POST' );
+                const body = await resp.json();
+                console.log(body)
+
+                if ( body.ok ) {
+                    client.id = body.cliente.id;
+                    client.user = {
+                        _id: uid,
+                        name: name
+                    }
+                    console.log(client)
+                    dispatch( startNewClient( client ) );
+                }
+
+                
+                
+            } catch (error) {
+                console.log(error)
+            }
+            
+    
+            
+    }
+}
+
+const startNewClient = ( client ) => ({ 
+    type: types.startNewClient,
+    payload: client
+
 })
 
 

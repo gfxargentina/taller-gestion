@@ -3,12 +3,14 @@ import { useDispatch } from 'react-redux';
 import Swal from 'sweetalert2';
 import { startAddNewClient } from '../../actions/clients';
 import { useForm } from '../../hooks/useForm'
+import { useHistory } from "react-router-dom";
 
 
 
 export const NuevoCliente = () => {
 
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const [ newClient, handleNewClientInput ] = useForm({
         dni: '',
@@ -31,11 +33,15 @@ export const NuevoCliente = () => {
             title: 'OK',
             text: 'Se registro un nuevo cliente',            
           })
+
+          history.push('/');
+          
+
     }
 
     //TODO: limpiar formulario y poner en el sweetalert si desea agregar un aparato para el cliente
     const cleanForm = () => {
-
+            
     }
     return (
         <>

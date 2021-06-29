@@ -6,7 +6,7 @@ const Cliente = require('../models/Cliente');
 const getClientes = async( req, res = response ) => {
 
     //busca todos los clientes con aparatos
-    const clientes = await Cliente.find({}).populate('aparatos', 'fechaEntrada fechaSalida aparato presupuesto garantia')
+    const clientes = await Cliente.find({}).populate('aparatos', 'fechaEntrada fechaSalida aparato presupuesto garantia').sort([['fecha', -1]])
 
     res.status(200).json({
         ok: true,

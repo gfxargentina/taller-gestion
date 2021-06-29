@@ -39,10 +39,7 @@ export const NuevoCliente = () => {
 
     }
 
-    //TODO: limpiar formulario y poner en el sweetalert si desea agregar un aparato para el cliente
-    const cleanForm = () => {
-            
-    }
+    
     return (
         <>
           <section className="flex flex-col md:flex-row h-screen items-center">

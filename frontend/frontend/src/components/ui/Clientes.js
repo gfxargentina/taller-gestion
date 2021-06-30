@@ -39,7 +39,7 @@ export const Clientes = () => {
 
   const dispatch = useDispatch();
   const clientes = useSelector( state => state.clientes.clients )
-  //console.log(cliente)
+  console.log(clientes)
   
   useEffect(() => {
     dispatch( startGetClients() );
@@ -80,7 +80,7 @@ export const Clientes = () => {
                             scope="col"
                             className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                           >
-                            Estado
+                            Fecha de ingreso
                           </th>
                           <th
                             scope="col"

@@ -66,25 +66,25 @@ export const Clientes = () => {
                         <tr>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                            className="px-6 py-3 text-left text-lg font-medium text-gray-500 uppercase tracking-wider"
                           >
                             Apellido y nombre
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                            className="px-6 py-3 text-left text-lg font-medium text-gray-500 uppercase tracking-wider"
                           >
                             Domicilio y Telefono
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                            className="px-6 py-3 text-left text-lg font-medium text-gray-500 uppercase tracking-wider"
                           >
                             Fecha de ingreso
                           </th>
                           <th
                             scope="col"
-                            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                            className="px-6 py-3 text-left text-lg font-medium text-gray-500 uppercase tracking-wider"
                           >
                             DNI
                           </th>
@@ -95,37 +95,40 @@ export const Clientes = () => {
                       </thead>
                       
                       
-                          <tbody className="bg-white divide-y divide-gray-200">
+                          <tbody className="bg-white  divide-y divide-gray-300">
                         {/* el ? se usa para que cuando llame a la api no de undefined,
                          porque el componente se carga primero y los datos todavia no estan listos */}
                         {clientes?.map((person) => (
                           <tr key={person.id}>
                             <td className="px-6 py-4 whitespace-nowrap">
-                              <div className="flex items-center">
-                                <div className="flex-shrink-0 h-10 w-10">
-                                    {/* <img className="h-10 w-10 rounded-full"  alt="" />   */}
-                                </div>
-                                <div className="ml-4">
-                                  <div className="text-sm font-medium text-gray-900">{person.nombreApellido}</div>
-                                  <div className="text-sm text-gray-500">{person.email}</div>
+                              <div className="flex items-center">                                
+                                <div className="ml-6">
+                                  <div className="text-lg font-medium text-gray-900">{person.nombreApellido}</div>
+                                  <div className="text-base text-gray-500">{person.email}</div>
                                 </div>
                               </div>
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap">
-                              <div className="text-sm text-gray-900">{person.domicilio}</div>
-                              <div className="text-sm text-gray-500">{person.telefono}</div>
+                              <div className="text-lg font-medium text-gray-900">{person.domicilio}</div>
+                              <div className="text-base text-gray-500">{person.telefono}</div>
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap">
-                              <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                              <span className="px-4 inline-flex text-base leading-8 font-semibold rounded-full bg-green-100 text-green-800">
                                 Entregado
                               </span>
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{person.dni}</td>
-                            <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                              <a href="ex" className="text-indigo-600 hover:text-indigo-900">
-                                Edit
-                              </a>
-                            </td>
+                            <td className="px-3 py-3 whitespace-nowrap text-lg font-medium text-gray-500">{person.dni}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">                              
+                              <button class="h-10 px-5 text-indigo-700 transition-colors duration-150 border border-indigo-500 
+                              rounded-lg focus:shadow-outline hover:bg-indigo-500 hover:text-indigo-100">Aparatos</button>
+
+                              <button class="h-10 ml-5 px-5  text-indigo-700 transition-colors duration-150 border border-green-500 
+                              rounded-lg focus:shadow-outline hover:bg-green-500 hover:text-indigo-100">Editar</button>
+
+                              <button class="h-10 ml-5 px-5 text-indigo-700 transition-colors duration-150 border border-red-500 
+                              rounded-lg focus:shadow-outline hover:bg-red-500 hover:text-indigo-100">Eliminar</button>
+                            </td>                            
+                            
                           </tr>
                         ))}
                       </tbody>    

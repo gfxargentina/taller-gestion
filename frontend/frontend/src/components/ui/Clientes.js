@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react'
 
 import { useDispatch, useSelector} from 'react-redux';
-import { startGetClients } from '../../actions/clients';
+import { startGetClients, setActiveClient } from '../../actions/clients';
 import { NoHayClientes } from './NoHayClientes';
 import {  Link } from "react-router-dom";
+import { ClientModal } from '../taller/ClientModal';
+import { uiOpenModal } from '../../actions/ui';
 
 
 
@@ -39,11 +41,21 @@ export const Clientes = () => {
 
   const dispatch = useDispatch();
   const clientes = useSelector( state => state.clientes.clients )
-  console.log(clientes)
+  //console.log(clientes)
   
   useEffect(() => {
     dispatch( startGetClients() );
   }, [dispatch])
+
+  const editarCliente = (e) => {
+    //console.log(e.target.name)
+       dispatch( setActiveClient(e.target.name) )
+  }
+
+  const openModal = (e) => {
+        dispatch( uiOpenModal() );
+        dispatch( setActiveClient(e.target.name) )
+  }
 
 
     return (
@@ -122,10 +134,10 @@ export const Clientes = () => {
                               <button class="h-10 px-5 text-indigo-700 transition-colors duration-150 border border-indigo-500 
                               rounded-lg focus:shadow-outline hover:bg-indigo-500 hover:text-indigo-100">Aparatos</button>
 
-                              <button class="h-10 ml-5 px-5  text-indigo-700 transition-colors duration-150 border border-green-500 
+                              <button onClick={ openModal } name={ person.id } class="h-10 ml-5 px-5  text-indigo-700 transition-colors duration-150 border border-green-500 
                               rounded-lg focus:shadow-outline hover:bg-green-500 hover:text-indigo-100">Editar</button>
-
-                              <button class="h-10 ml-5 px-5 text-indigo-700 transition-colors duration-150 border border-red-500 
+                                                        
+                               <button class="h-10 ml-5 px-5 text-indigo-700 transition-colors duration-150 border border-red-500 
                               rounded-lg focus:shadow-outline hover:bg-red-500 hover:text-indigo-100">Eliminar</button>
                             </td>                            
                             
@@ -139,7 +151,9 @@ export const Clientes = () => {
             </div>
             </div>
             ) : ( <NoHayClientes />)
-          }             
+          } 
+
+          <ClientModal />            
     </>
         
     )

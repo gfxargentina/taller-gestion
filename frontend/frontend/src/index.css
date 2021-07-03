@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.react-datetime-picker input:focus {
+    outline: none;
+}

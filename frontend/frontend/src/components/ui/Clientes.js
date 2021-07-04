@@ -5,33 +5,6 @@ import { startGetClients, setActiveClient } from '../../actions/clients';
 import { NoHayClientes } from './NoHayClientes';
 import {  Link } from "react-router-dom";
 import { ClientModal } from '../taller/ClientModal';
-//import { uiOpenModal } from '../../actions/ui';
-
-
-
-
-
-// const people = [
-//     {
-//       name: 'Jane Cooper',
-//       title: 'Regional Paradigm Technician',
-//       department: 'Optimization',
-//       role: 'Admin',
-//       email: 'jane.cooper@example.com',
-//       image:
-//         'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-//     },
-//     {
-//         name: 'Jane Cooper',
-//         title: 'Regional Paradigm Technician',
-//         department: 'Optimization',
-//         role: 'Admin',
-//         email: 'jane.cooper@example.com',
-//         image:
-//           'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-//       },
-//     // More people...
-//   ]
 
 
 
@@ -55,7 +28,7 @@ export const Clientes = () => {
   // }
 
   const editClientComponent = (e) => {
-        // dispatch( uiOpenModal() );
+        // le mande el id del cliente a activeClient en el store
          dispatch( setActiveClient(e.target.name) )
   }
 

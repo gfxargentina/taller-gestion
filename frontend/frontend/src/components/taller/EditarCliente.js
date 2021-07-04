@@ -1,42 +1,35 @@
 import React from 'react'
-import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
+import Swal from 'sweetalert2';
 import { startEditClient } from '../../actions/clients';
-import { uiCloseModal } from '../../actions/ui';
 //import DateTimePicker from 'react-datetime-picker';
 //import moment from 'moment';
 import { useForm } from '../../hooks/useForm';
+import { useHistory } from "react-router-dom";
 
 
 
 
 
-//posiciona el modal en el medio
-const customStyles = {
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-    },
-  };
 
-  //conectar el modal con tu app
-//   Modal.setAppElement('#root');
+
+
+
+ 
 
 //   const startDate = moment();
 
 
-export const ClientModal = () => {
+export const EditarCliente = () => {
 
     const dispatch = useDispatch();
-    const {modalOpen} = useSelector(state => state.ui)
+    const history = useHistory();
+  
     //trae el id de activeClient
     const id = useSelector(state => state.clientes.activeClient)
 
     //busca el cliente del store con el id de activeClient
+    //despues le pasa los datos al useForm
     const cliente = useSelector(state => state.clientes.clients.find(client => client.id === id ))
     //console.log(cliente)
     
@@ -44,11 +37,11 @@ export const ClientModal = () => {
     // const [ dateIngreso, setDateIngreso] = useState( startDate.toDate() );
 
     const [ editClient, handleEditClientInput ] = useForm({
-        dni: '',        
-        nombreApellido: '',
-        email: '',        
-        telefono: '',
-        domicilio: '',
+        dni: cliente.dni,        
+        nombreApellido: cliente.nombreApellido,
+        email: cliente.email,        
+        telefono: cliente.telefono,
+        domicilio: cliente.domicilio,
         
     })
 
@@ -58,7 +51,14 @@ export const ClientModal = () => {
     const handleEditClient = (e) => {
         e.preventDefault();
       
-            dispatch( startEditClient( editClient ) )
+            dispatch( startEditClient( editClient ) );
+            Swal.fire({
+                icon: 'success',
+                title: 'OK',
+                text: 'Se Actualizo el cliente',            
+              })
+    
+              history.push('/');
         }
 
     // const fechaIngreso = ( e ) => {
@@ -67,25 +67,19 @@ export const ClientModal = () => {
     // }
     
     
-    const closeModal = () => {
-        //console.log('Closing')
-        dispatch( uiCloseModal() );
-}
+//     const closeModal = () => {
+//         //console.log('Closing')
+//         dispatch( uiCloseModal() );
+// }
 
     return (
         
-        <Modal
-             isOpen={ modalOpen }
-    //         // onAfterOpen={afterOpenModal}
-             onRequestClose={ closeModal }
-             style={customStyles}
-             closeTimeoutMS={ 200 }
-    //         //overlayClassName="overlay"
-             contentLabel="Example Modal"
-       >
+        <> 
           
           
-
+    <section className="flex flex-col md:flex-row h-screen items-center">
+    <div className="bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12
+                    flex items-center justify-center">
         <div className="w-max h-100" > 
           <h1 className="text-xl text-center md:text-2xl font-bold leading-tight mt-12">Actualizar Cliente</h1>
 
@@ -160,11 +154,12 @@ export const ClientModal = () => {
                 <button 
                     type="submit" 
                     className="w-full block bg-indigo-500 hover:bg-indigo-400 focus:bg-indigo-400 text-white font-semibold rounded-lg
-                        px-4 py-3 mt-6">Editar  Cliente</button>
+                        px-4 py-3 mt-6">Actualizar  Cliente</button>
                 </form>
                 </div>
+                </div>
+        </section>
 
-
-      </Modal>
+                </>
     )
 }

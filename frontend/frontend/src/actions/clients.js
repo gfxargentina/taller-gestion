@@ -5,7 +5,7 @@ import { prepareDates } from "../helpers/prepareDates";
 import Swal from "sweetalert2";
 
 //establecer el cliente activo
-export const setActiveClient = ( id, client ) => ({
+export const setActiveClient = ( client ) => ({
     type: types.setActiveClient,
     payload: client
 })
@@ -39,6 +39,7 @@ const clientsLoaded = ( clients ) => ({
     type: types.clientGetAll,
     payload: clients
 })
+
 
 //accion para inicializar proceso de grabacion de nuevo cliente
 export const startAddNewClient = ( client ) => {
@@ -81,11 +82,13 @@ const startNewClient = ( client ) => ({
 
 //accion para inicializar la edicion de cliente
  export const startEditClient = ( client ) => { 
-     return async(dispatch) => {
+     return async(dispatch, getState) => {
+
+        const id = getState().clientes.activeClient;
         
          try {
             //console.log(client)     
-               const resp = await fetchConToken( `clientes/${ client.id }`, client, 'PUT' );
+               const resp = await fetchConToken( `clientes/${ id }`, client, 'PUT' );
                const body = await resp.json();
                //console.log(body)
 

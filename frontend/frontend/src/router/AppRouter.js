@@ -9,6 +9,7 @@ import {
 import { startchecking } from '../actions/auth';
 import { LoginScreen } from '../components/auth/LoginScreen';
 import { RegisterScreen } from '../components/auth/RegisterScreen';
+import { ScreenEditarCliente } from '../components/taller/ScreenEditarCliente';
 import { ScreenNuevoCliente } from '../components/taller/ScreenNuevoCliente';
 import { TallerScreen } from '../components/taller/TallerScreen';
 import { PrivateRoute } from './PrivateRoute';
@@ -52,6 +53,13 @@ export const AppRouter = () => {
                     <PrivateRoute 
                         exact path="/nuevo-cliente" 
                         component={ ScreenNuevoCliente }
+                        isAuthenticated={ !!uid } 
+
+                        />
+                    
+                    <PrivateRoute 
+                        exact path="/editar-cliente" 
+                        component={ ScreenEditarCliente }
                         isAuthenticated={ !!uid } 
 
                         />

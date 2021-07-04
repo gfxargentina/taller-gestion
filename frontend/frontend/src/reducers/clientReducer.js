@@ -14,7 +14,7 @@ export const clientReducer = ( state = initialState, action ) => {
         case types.setActiveClient:
             return {
                 ...state,
-                activeClient: action.payload
+                activeClient: action.payload 
             }
 
         case types.clientGetAll:

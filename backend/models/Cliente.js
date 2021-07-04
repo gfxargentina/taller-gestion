@@ -13,7 +13,6 @@ const ClienteSchema = Schema({
     telefono: {
         type: Number,
         required: true,
-        unique: true
     },
     email: {
         type: String

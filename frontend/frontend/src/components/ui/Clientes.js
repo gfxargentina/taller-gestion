@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-
+import dayjs from "dayjs";
 import { useDispatch, useSelector} from 'react-redux';
 import { startGetClients, setActiveClient } from '../../actions/clients';
 import { NoHayClientes } from './NoHayClientes';
@@ -15,7 +15,7 @@ export const Clientes = () => {
   const dispatch = useDispatch();
   const clientes = useSelector( state => state.clientes.clients );
   
-  //console.log(clientes)
+  //console.log(clientes.aparatos)
   
   useEffect(() => {
     dispatch( startGetClients() );
@@ -106,7 +106,7 @@ export const Clientes = () => {
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap">
                               <span className="px-4 inline-flex text-base leading-8 font-semibold rounded-full bg-green-100 text-green-800">
-                                Entregado
+                                { dayjs(person.fecha).format("DD/MM/YYYY") }
                               </span>
                             </td>
                             <td className="px-3 py-3 whitespace-nowrap text-lg font-medium text-gray-500">{person.dni}</td>

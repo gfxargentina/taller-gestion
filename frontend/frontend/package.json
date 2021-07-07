@@ -9,6 +9,7 @@
     "@testing-library/jest-dom": "^5.13.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "dayjs": "^1.10.6",
     "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-datetime-picker": "^3.3.0",

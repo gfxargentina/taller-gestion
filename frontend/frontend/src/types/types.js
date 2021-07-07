@@ -22,7 +22,14 @@ export const types = {
     startNewClient:'[client] Start add new client',
     //inicializa la edicion de un cliente    
     startEditClient:'[client] Start edit client',
+    //inicializa el proceso de grabacion de un nuevo aparato
     clientUpdated:'[client] client updated',
+
+    startNewAparato:'[aparato] Start add new aparato',
+    startEditAparato:'[aparato] Start edit aparato',
+    aparatoUpdated:'[aparato] aparato updated',
+
+    
     
 
 

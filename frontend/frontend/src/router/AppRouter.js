@@ -11,9 +11,14 @@ import { LoginScreen } from '../components/auth/LoginScreen';
 import { RegisterScreen } from '../components/auth/RegisterScreen';
 import { ScreenEditarCliente } from '../components/taller/ScreenEditarCliente';
 import { ScreenNuevoCliente } from '../components/taller/ScreenNuevoCliente';
+import { ScreenAparatos } from '../components/taller/ScreenAparatos';
 import { TallerScreen } from '../components/taller/TallerScreen';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
+import { NuevoAparato } from '../components/taller/NuevoAparato';
+import { ScreenNuevoAparato } from '../components/taller/ScreenNuevoAparato';
+
+
 
 
 
@@ -63,6 +68,22 @@ export const AppRouter = () => {
                         isAuthenticated={ !!uid } 
 
                         />
+
+                    <PrivateRoute 
+                        exact path="/aparatos" 
+                        component={ ScreenAparatos }
+                        isAuthenticated={ !!uid } 
+
+                        />
+
+                    <PrivateRoute 
+                        exact path="/nuevo-aparato" 
+                        component={ ScreenNuevoAparato }
+                        isAuthenticated={ !!uid } 
+
+                        />
+
+                   
                     
                     <PublicRoute 
                         exact 

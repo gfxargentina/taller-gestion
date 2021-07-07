@@ -10,7 +10,7 @@ import { ClientModal } from '../taller/ClientModal';
 
   
 
-export const Clientes = () => {
+export const GetAparatos = () => {
 
   const dispatch = useDispatch();
   const clientes = useSelector( state => state.clientes.clients );

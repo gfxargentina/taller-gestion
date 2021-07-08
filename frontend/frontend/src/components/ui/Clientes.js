@@ -18,9 +18,10 @@ export const Clientes = () => {
   //console.log(clientes.aparatos)
   
   useEffect(() => {
-    dispatch( startGetClients() );
-    //se actualiza cada vez que cambia algo en clientes del store
-  }, [dispatch, clientes])
+    
+      dispatch( startGetClients() );
+        
+  }, [dispatch, clientes.aparatos])
 
   // const editarCliente = (e) => {
   //   //console.log(e.target.name)

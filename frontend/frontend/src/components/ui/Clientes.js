@@ -20,7 +20,8 @@ export const Clientes = () => {
   useEffect(() => {
     
       dispatch( startGetClients() );
-        
+     //no se le pasa un objeto solo como dependencia, usar objeto.props para 
+     //que no haiga un loop infinito
   }, [dispatch, clientes.aparatos])
 
   // const editarCliente = (e) => {

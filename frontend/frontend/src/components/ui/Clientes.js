@@ -15,7 +15,7 @@ export const Clientes = () => {
   const dispatch = useDispatch();
   const clientes = useSelector( state => state.clientes.clients );
   
-  //console.log(clientes.aparatos)
+  //console.log(clientes)
   
   useEffect(() => {
     

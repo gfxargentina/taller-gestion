@@ -1,41 +1,33 @@
-import { types } from "../types/types";
+import { types } from '../types/types';
 
+const initialState = {
+	//aparatos: [],
+	aparatoActivo: null
+};
 
+export const aparatoReducer = (state = initialState, action) => {
+	switch (action.type) {
+		case types.aparatoActivo:
+			return {
+				...state,
+				aparatoActivo: action.payload
+			};
 
-const initialState = { 
-    aparatos: [],
-    activeAparato: null
-}
+		// case types.clientGetAll:
+		//     return {
+		//         ...state,
+		//         clients: [ ...action.payload ]
+		//     }
 
-export const aparatoReducer = ( state = initialState, action ) => {
+		// case types.clientUpdated:
+		//     return {
+		//         ...state,
+		//         clients: state.clients.map(
+		//             e => ( e.id === action.payload.id ) ? action.payload : e
+		//         )
+		//     }
 
-    switch (action.type) {
-
-        // case types.setActiveAparato:
-        //     return {
-        //         ...state,
-        //         activeAparato: action.payload 
-        //     }
-
-            
-
-        // case types.clientGetAll:
-        //     return {
-        //         ...state,
-        //         clients: [ ...action.payload ]
-        //     }
-
-        // case types.clientUpdated:
-        //     return {
-        //         ...state,
-        //         clients: state.clients.map(
-        //             e => ( e.id === action.payload.id ) ? action.payload : e
-        //         )
-        //     }
-        
-    
-        default:
-            return state;
-    }
-}
-
+		default:
+			return state;
+	}
+};

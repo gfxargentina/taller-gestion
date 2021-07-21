@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector} from 'react-redux';
-//import { setActiveClient } from '../../actions/clients';
 import {  Link } from "react-router-dom";
 import dayjs from "dayjs";
 import { ClientModal } from '../taller/ClientModal';
 import { NoHayAparatos } from './NoHayAparatos';
+import { aparatoActivo } from '../../actions/aparatos';
 
 
 
@@ -25,17 +25,13 @@ export const GetAparatos = () => {
   //console.log( aparatos )
 
   
-  const [state, setstate] = useState([ aparatos ])
-  console.log(state)
-
-
   
+    
   
-  const detalleAparato = (e) => {
-        // le mande el id del cliente a activeClient en el store
-         //dispatch( setActiveClient(e.target.name) )
-         const aparato = state.find(aparato => aparato.id === id )
-         console.log(aparato)
+  const detalleAparato = (e) => {        
+         //console.log(e.target.name)
+         dispatch( aparatoActivo(e.target.name))
+         
   }
 
   
@@ -117,10 +113,10 @@ export const GetAparatos = () => {
                             <td className="px-3 py-3 whitespace-nowrap text-lg font-medium text-gray-500"> {aparato.presupuesto} </td>
                             <td className="px-3 py-3 whitespace-nowrap text-center text-lg font-medium text-gray-500"> $27000 </td>
                             <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                              {/* <Link to="/aparatos">                             */}
-                              <button onClick={ detalleAparato }  name={ aparato.id } class="h-10 px-5 text-indigo-700 transition-colors duration-150 border border-indigo-500 
+                              <Link to="/detalle-aparato">                             
+                              <button onClick={ detalleAparato }  name={ [aparato._id] } class="h-10 px-5 text-indigo-700 transition-colors duration-150 border border-indigo-500 
                               rounded-lg focus:shadow-outline hover:bg-indigo-500 hover:text-indigo-100">Detalle</button>
-                              {/* </Link>   */}
+                              </Link>
 
                               <Link to="/editar-cliente">
                               <button onClick={ detalleAparato }  name="{ person.id }" class="h-10 ml-5 px-5  text-indigo-700 transition-colors duration-150 border border-green-500 

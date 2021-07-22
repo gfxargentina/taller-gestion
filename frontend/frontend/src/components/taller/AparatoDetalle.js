@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-//import { Aparatos } from './Aparatos';
+import dayjs from "dayjs";
+
 
 export const AparatoDetalle = () => {
 	//trae el id de activeClient del store
@@ -18,43 +19,42 @@ export const AparatoDetalle = () => {
 
 	return (
 		<>
-			
-			<div className="relative flex items-center">             
-  <div className=" w-full ">
-  <h1 className="text-center" >Detalle de aparato</h1>
-    <div className="w-2/3 mx-auto shadow-md rounded-md p-4 bg-white">
-      
-      <div className="flex gap-2 flex-col md:flex-row center">
-        <div className="relative flex-1">
-          <input id="departure" value={aparato.fechaEntrada} name="departure" type="text" className="peer h-10 w-full border border-1.5 rounded-md border-gray-300 text-gray-900 placeholder-transparent focus:outline-none focus:border-red-600 focus:border-2 p-3" placeholder="quelquechose" />
-          <label for="departure" className="absolute left-2 px-1 -top-2.5 bg-white text-red-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-900 peer-placeholder-shown:top-2 peer-focus:-top-2.5 peer-focus:text-red-600 peer-focus:text-sm">Fecha entrada :</label>
-          
-        </div>
-        <div className="relative self-center">
-          
-        </div>
-        <div className="relative flex-1">
-          <input id="arrival" value={aparato.aparato} name="arrival" type="text" className="peer h-10 w-full border border-1.5 rounded-md border-gray-300 text-gray-900 placeholder-transparent focus:outline-none focus:border-red-600 focus:border-2 p-3" placeholder="quelquechose" />
-          <label for="arrival" className="absolute left-2 px-1 -top-2.5 bg-white text-red-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-900 peer-placeholder-shown:top-2 peer-focus:-top-2.5 peer-focus:text-red-600 peer-focus:text-sm">Aparato :</label>
-        </div>
-        <div></div>
-        <div className="relative flex-1">
-          <input id="eta" value="20/07/2021" name="eta" type="text" className="peer h-10 w-full border border-1.5 rounded-md border-gray-300 text-gray-900 placeholder-transparent focus:outline-none focus:border-red-600 focus:border-2 p-3" placeholder="quelquechose" />
-          <label for="eta" className="absolute left-2 px-1 -top-2.5 bg-white text-red-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-900 peer-placeholder-shown:top-2 peer-focus:-top-2.5 peer-focus:text-red-600 peer-focus:text-sm">Entregado :</label>
-         
-        </div>
-        <div className="relative flex-1">
-          <input id="etd" name="etd" type="text" className="peer h-10 w-full border border-1.5 rounded-md border-gray-300 text-gray-900 placeholder-transparent focus:outline-none focus:border-red-600 focus:border-2 p-3" placeholder="quelquechose" />
-          <label for="etd" className="absolute left-2 px-1 -top-2.5 bg-white text-red-600 text-sm transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-900 peer-placeholder-shown:top-2 peer-focus:-top-2.5 peer-focus:text-red-600 peer-focus:text-sm">Precio :</label>
-          
+      <div className="bg-blue-400 min-h-screen flex items-center justify-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 " >
+          <div className="flex flex-col col-auto">
+            <label className="col-auto">Fecha de Entrada</label>
+            <input type="text" className="rounded-md p-2" value={ dayjs(aparato.fechaEntrada).format("DD/MM/YYYY") } />
+          </div>
+          <div className="flex flex-col">
+            <label className="">Aparato</label>
+            <input type="text" className="rounded-md p-2" value={ aparato.aparato } />
+          </div>
+          <div className="flex flex-col">
+            <label className="">Retirado</label>
+            <input type="text" className="rounded-md p-2" value="" />
+          </div>
+          <div className="flex flex-col">
+            <label className="col-auto">Precio</label>
+            <input type="text" className="rounded-md p-2" value="$25.000" />
+          </div>
+          <div className="flex flex-col md:col-span-2">
+            <label className="col-auto">Falla</label>
+            <input type="text" className="rounded-md p-2" value={ aparato.falla } />
+          </div>
+          <div className="flex flex-col md:col-span-2">
+            <label className="col-auto">Observaciones</label>
+            <input type="text" className="rounded-md p-2" value={ aparato.observaciones } />
+          </div>
+          <div className="flex flex-col md:col-span-3">
+            <label className="col-auto">Presupuesto</label>
+            <input type="text" className="rounded-md p-2" value={ aparato.presupuesto } />
+          </div>
+          <div className="flex flex-col">
+            <label className="col-auto">Precio</label>
+            <input type="text" className="rounded-md p-2" value="$15.000" />
+          </div>
         </div>
       </div>
-      <div className="flex justify-center mt-6">
-        <button className="bg-red-900 text-white font-extrabold text-lg rounded-lg px-6 py-3">Actualizar Aparato</button>
-      </div>
-    </div>
-  </div>
-</div>
 		</>
 	);
 };

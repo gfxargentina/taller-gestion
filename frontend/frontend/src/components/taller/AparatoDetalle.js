@@ -19,47 +19,47 @@ export const AparatoDetalle = () => {
 
 	return (
 		<>
-      <div className="bg-blue-400 min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-start justify-center p-5">
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2" >
-          <div className="flex flex-col">
-            <label className="text-center">Fecha de Entrada</label>
+          <div className="flex flex-col shadow-2xl ">
+            <label className="text-center font-bold">Fecha de Entrada</label>
             {/* <input type="text" className="rounded-md p-2" value={ dayjs(aparato.fechaEntrada).format("DD/MM/YYYY") } /> */}
-            <div className="flex-none bg-white rounded-md p-2 text-center">
+            <div className="flex-none bg-white rounded-md p-2 text-center border border-blue-500">
             { dayjs(aparato.fechaEntrada).format("DD/MM/YYYY") }
             </div>
           </div>
-          <div className="flex flex-col ">
-            <label className="text-center">Aparato</label>
+          <div className="flex flex-col shadow-2xl ">
+            <label className="text-center font-bold">Aparato</label>
             {/* <input type="text" className="rounded-md p-2" value={ aparato.aparato } /> */}
-            <div className="bg-white rounded-md p-2">
+            <div className="bg-white rounded-md p-2 border border-blue-500">
             { aparato.aparato }
             </div>
           </div>
-          <div className="flex flex-col">
-            <label className="text-center">Estado</label>
-            <div className="bg-white rounded-md p-2 text-center">
+          <div className="flex flex-col shadow-2xl">
+            <label className="text-center font-bold">Estado</label>
+            <div className="bg-white rounded-md p-2 text-center border border-blue-500">
                 En Observacion            
             </div>
           </div>
-          <div className="flex flex-col">
-            <label className="col-auto">Fecha de Retirado</label>
-            <input type="text" className="rounded-md p-2" value="$25.000" />
+          <div className="flex flex-col shadow-2xl">
+            <label className="col-auto font-bold">Fecha de Retirado</label>
+            <input type="text" className="rounded-md p-2 border border-blue-500" value="$25.000" />
           </div>
-          <div className="flex flex-col md:col-span-2">
-            <label className="col-auto">Falla</label>
-            <div className="bg-white rounded-md p-2 h-24 max-w-prose"> {aparato.falla} </div>
+          <div className="flex flex-col md:col-span-2 shadow-2xl">
+            <label className="col-auto font-bold">Falla</label>
+            <div className="bg-white rounded-md p-2 h-24 max-w-prose border border-blue-500"> {aparato.falla} </div>
           </div>
-          <div className="flex flex-col md:col-span-2">
-            <label className="">Observaciones</label>
-            <div className="bg-white rounded-md p-2 h-24 max-w-prose"> {aparato.observaciones} </div>
+          <div className="flex flex-col md:col-span-2 shadow-2xl">
+            <label className="font-bold">Observaciones</label>
+            <div className="bg-white rounded-md p-2 h-24 max-w-prose border border-blue-500"> {aparato.observaciones} </div>
           </div>
-          <div className="flex flex-col md:col-span-2">
-            <label className="col-auto">Presupuesto</label>            
-            <div className="bg-white rounded-md p-2 h-24 max-w-prose" > {aparato.presupuesto}  </div>
+          <div className="flex flex-col md:col-span-2 shadow-2xl">
+            <label className="col-auto font-bold">Presupuesto</label>            
+            <div className="bg-white rounded-md p-2 h-24 max-w-prose border border-blue-500" > {aparato.presupuesto}  </div>
           </div>
           <div className="flex flex-col md:col-span-1">
-            <label className="col-auto">Precio</label>            
-            <div className="bg-white rounded-md p-2 w-24 " >$16.000</div>
+            <label className="col-auto font-bold">Precio</label>            
+            <div className="bg-white rounded-md p-2 w-24 border border-blue-500" >$16.000</div>
           </div>
         </div>
       </div>

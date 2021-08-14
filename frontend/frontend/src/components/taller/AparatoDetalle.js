@@ -47,15 +47,15 @@ export const AparatoDetalle = () => {
           </div>
           <div className="flex flex-col md:col-span-2 shadow-2xl">
             <label className="col-auto font-bold">Falla</label>
-            <div className="bg-white rounded-md p-2 h-24 max-w-prose border border-blue-500"> {aparato.falla} </div>
+            <div className="bg-white rounded-md p-2 h-24 w-auto border border-blue-500"> {aparato.falla} </div>
           </div>
           <div className="flex flex-col md:col-span-2 shadow-2xl">
             <label className="font-bold">Observaciones</label>
-            <div className="bg-white rounded-md p-2 h-24 max-w-prose border border-blue-500"> {aparato.observaciones} </div>
+            <div className="bg-white rounded-md p-2 h-24 w-auto border border-blue-500"> {aparato.observaciones} </div>
           </div>
           <div className="flex flex-col md:col-span-2 shadow-2xl">
             <label className="col-auto font-bold">Presupuesto</label>            
-            <div className="bg-white rounded-md p-2 h-24 max-w-prose border border-blue-500" > {aparato.presupuesto}  </div>
+            <div className="bg-white rounded-md p-2 h-24 w-auto border border-blue-500" > {aparato.presupuesto}  </div>
           </div>
           <div className="flex flex-col md:col-span-1">
             <label className="col-auto font-bold">Precio</label>            

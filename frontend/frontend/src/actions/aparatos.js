@@ -26,6 +26,7 @@ export const startAddNewAparato = (aparato) => {
 				dispatch(startNewAparato(aparato));
 			} else {
 				Swal.fire('Error', body.msg, 'error');
+				
 			}
 		} catch (error) {
 			console.log(error);

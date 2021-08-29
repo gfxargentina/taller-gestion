@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 import { useForm } from '../../hooks/useForm'
 import { useHistory } from "react-router-dom";
 import { startAddNewAparato } from '../../actions/aparatos';
-
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css'
 
 
 export const NuevoAparato = () => {
@@ -26,8 +27,16 @@ export const NuevoAparato = () => {
         
     })
 
-    const { fechaEntrada, fechaSalida, aparato, falla, presupuesto, observaciones, precio, garantia } = newAparato;
+    const {fechaSalida, aparato, falla, presupuesto, observaciones, precio, garantia } = newAparato;
+    
 
+    const [ selectedDate, setSelectedDate ] = useState( new Date() );
+    const datePicker = (date) => {
+        setSelectedDate(date);                        
+       //console.log(date)
+        newAparato.fechaEntrada = `${date}`;
+    }  
+    
     const handleNewAparato = (e) => {
         e.preventDefault();
         //console.log(formRegister)
@@ -40,11 +49,11 @@ export const NuevoAparato = () => {
           })
 
           history.push('/');
-          
-
     }
-
+   
     
+    
+
     return (
         <>
           <section className="flex flex-col md:flex-row h-screen items-center">
@@ -61,13 +70,21 @@ export const NuevoAparato = () => {
                     <form className="mt-6" onSubmit={ handleNewAparato }>
                     <div className="mb-4">
                         <label className="block text-gray-700">Fecha de entrada</label>
-                        <input 
+                        {/* <input 
                             type="text" 
                             name="fechaEntrada"
                             value={ fechaEntrada }
                             onChange={ handleNewAparatoInput }
                             placeholder="ingrese fecha de entrada del aparato" 
-                            class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus autocomplete required />
+                            class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus autocomplete required /> */}
+                        <DatePicker 
+                            selected={selectedDate} 
+                            onChange={ datePicker }                                                  
+                            dateFormat="dd/MM/yyyy"
+                                                   
+                            />
+                            
+                              
                     </div>
                     <div className="mb-4">
                         <label className="block text-gray-700">Aparato</label>

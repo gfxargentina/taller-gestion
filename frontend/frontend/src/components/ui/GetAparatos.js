@@ -97,13 +97,13 @@ export const GetAparatos = () => {
                               <div className="flex items-center">                                
                                 <div className="ml-6">
                                   <div className="text-lg font-medium text-gray-900">{aparato.aparato}</div>                                  
-                                  <div className="text-base text-gray-500">person.email</div>
+                                  {/* <div className="text-base text-gray-500">person.email</div> */}
                                 </div>
                               </div>
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap">
                               <div className="text-lg font-medium text-gray-900">{aparato.falla}</div>
-                              <div className="text-base text-gray-500">person.telefono</div>
+                              {/* <div className="text-base text-gray-500">person.telefono</div> */}
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap">
                               <span className="px-4 inline-flex text-base leading-8 font-semibold rounded-full bg-green-100 text-green-800">

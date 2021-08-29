@@ -30,7 +30,7 @@ export const NuevoAparato = () => {
     const {fechaSalida, aparato, falla, presupuesto, observaciones, precio, garantia } = newAparato;
     
     //DatePicker
-    const [ selectedDate, setSelectedDate ] = useState( new Date() );
+    const [ selectedDate, setSelectedDate ] = useState('');
     const datePicker = (date) => {
         setSelectedDate(date);                        
        //console.log(date)
@@ -81,6 +81,8 @@ export const NuevoAparato = () => {
                             selected={selectedDate} 
                             onChange={ datePicker }                                                  
                             dateFormat="dd/MM/yyyy"
+                            placeholderText="Seleccione una Fecha"
+                            
                                                    
                             />
                             

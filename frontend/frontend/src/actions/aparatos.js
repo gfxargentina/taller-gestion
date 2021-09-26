@@ -38,3 +38,33 @@ const startNewAparato = (aparato) => ({
 	type: types.startNewAparato,
 	payload: aparato
 });
+
+//EDITAR UN APARATO
+export const startEditAparato = ( aparato ) => { 
+	return async(dispatch, getState) => {
+
+	   const id = getState().aparatos.aparatoActivo;
+	   
+		try {
+		   console.log(aparato)     
+			  const resp = await fetchConToken( `aparatos/${ id }`, aparato, 'PUT' );
+			  const body = await resp.json();
+			  //console.log(body)
+
+			  if ( body.ok ) {
+				  dispatch( aparatoUpdated( aparato ) );
+			  } else {
+			   Swal.fire('Error', body.msg , 'error');
+			  }
+
+		} catch (error) {
+			console.log(error)
+		   
+		}
+	}
+}
+
+const aparatoUpdated = ( aparato ) => ({ 
+   type: types.aparatoUpdated,
+   payload: aparato
+});

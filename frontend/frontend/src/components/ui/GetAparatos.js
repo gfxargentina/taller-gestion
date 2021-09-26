@@ -34,6 +34,12 @@ export const GetAparatos = () => {
          
   }
 
+  const editarAparato = (e) => {        
+    //console.log(e.target.name)
+    dispatch( aparatoActivo(e.target.name))
+    
+}
+
   
 
 
@@ -118,8 +124,8 @@ export const GetAparatos = () => {
                               rounded-lg focus:shadow-outline hover:bg-indigo-500 hover:text-indigo-100">Detalle</button>
                               </Link>
 
-                              <Link to="/editar-cliente">
-                              <button onClick={ detalleAparato }  name="{ person.id }" class="h-10 ml-5 px-5  text-indigo-700 transition-colors duration-150 border border-green-500 
+                              <Link to="/editar-aparato">
+                              <button onClick={ editarAparato }  name={ [aparato._id] } class="h-10 ml-5 px-5  text-indigo-700 transition-colors duration-150 border border-green-500 
                               rounded-lg focus:shadow-outline hover:bg-green-500 hover:text-indigo-100">Editar</button>
                               </Link>
                                                         

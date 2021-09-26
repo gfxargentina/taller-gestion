@@ -14,6 +14,8 @@ import { PublicRoute } from './PublicRoute';
 import { NuevoAparato } from '../components/taller/NuevoAparato';
 import { ScreenNuevoAparato } from '../components/taller/ScreenNuevoAparato';
 import { ScreenDetalleAparato } from '../components/taller/ScreenDetalleAparato';
+import { ScreenEditarAparato } from '../components/taller/ScreenEditarAparato';
+
 
 export const AppRouter = () => {
 	const dispatch = useDispatch();
@@ -55,6 +57,13 @@ export const AppRouter = () => {
 						exact
 						path="/detalle-aparato"
 						component={ScreenDetalleAparato}
+						isAuthenticated={!!uid}
+					/>
+
+					<PrivateRoute
+						exact
+						path="/editar-aparato"
+						component={ ScreenEditarAparato }
 						isAuthenticated={!!uid}
 					/>
 

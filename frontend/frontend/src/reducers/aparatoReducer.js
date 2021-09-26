@@ -19,13 +19,13 @@ export const aparatoReducer = (state = initialState, action) => {
 		//         clients: [ ...action.payload ]
 		//     }
 
-		// case types.clientUpdated:
-		//     return {
-		//         ...state,
-		//         clients: state.clients.map(
-		//             e => ( e.id === action.payload.id ) ? action.payload : e
-		//         )
-		//     }
+		 case types.aparatoUpdated:
+		     return {
+		         ...state,
+		         aparatos: state.aparatos.map(
+		             e => ( e.id === action.payload.id ) ? action.payload : e
+		         )
+		     }
 
 		default:
 			return state;

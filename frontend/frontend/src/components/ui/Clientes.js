@@ -5,6 +5,7 @@ import { startGetClients, setActiveClient } from '../../actions/clients';
 import { NoHayClientes } from './NoHayClientes';
 import {  Link } from "react-router-dom";
 import { ClientModal } from '../taller/ClientModal';
+import { startGetAparatos } from '../../actions/aparatos';
 
 
 
@@ -37,6 +38,8 @@ export const Clientes = () => {
   const aparatos = (e) => {
     //console.log(e.target.name)
     dispatch( setActiveClient(e.target.name) )
+    dispatch( startGetAparatos(e.target.name))
+    
   }
 
 

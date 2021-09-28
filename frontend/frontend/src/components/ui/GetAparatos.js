@@ -4,7 +4,7 @@ import {  Link } from "react-router-dom";
 import dayjs from "dayjs";
 import { ClientModal } from '../taller/ClientModal';
 import { NoHayAparatos } from './NoHayAparatos';
-import { aparatoActivo } from '../../actions/aparatos';
+import { aparatoActivo} from '../../actions/aparatos';
 
 
 
@@ -14,7 +14,7 @@ export const GetAparatos = () => {
 
   const dispatch = useDispatch();
   //const clientes = useSelector( state => state.clientes.clients );
-  //console.log(clientes)
+  
 
    //trae el id de activeClient
    const id = useSelector(state => state.clientes.activeClient)

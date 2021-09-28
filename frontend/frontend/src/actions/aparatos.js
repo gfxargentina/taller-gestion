@@ -2,12 +2,44 @@ import { types } from '../types/types';
 import { fetchConToken } from '../helpers/fetch';
 //import { prepareDates } from "../helpers/prepareDates";
 import Swal from 'sweetalert2';
+import { prepareDates } from '../helpers/prepareDates';
+
 
 //establecer el aparato activo en el store
 export const aparatoActivo = (aparato) => ({
 	type: types.aparatoActivo,
 	payload: aparato
 });
+
+//traer todos los aparatos de db
+export const startGetAparatos = () => {
+    return async(dispatch) => {
+        //verificar que llega ok
+        //console.log('start get all clients')
+        
+        try {
+            const resp = await fetchConToken('aparatos');
+            const body = await resp.json();
+            
+
+            const aparatos = prepareDates(body.aparatos);
+            //console.log(clients)
+           
+
+            dispatch ( aparatosLoaded( aparatos ));
+            
+
+        } catch (error) {
+            console.log(error)
+        }
+        
+    }
+}
+
+const aparatosLoaded = ( aparatos ) => ({
+    type: types.aparatosGetAll,
+    payload: aparatos
+})
 
 //accion para inicializar proceso de grabacion de nuevo cliente
 export const startAddNewAparato = (aparato) => {
@@ -44,10 +76,10 @@ export const startEditAparato = ( aparato ) => {
 	return async(dispatch, getState) => {
 
 	   const id = getState().aparatos.aparatoActivo;
-	   
+	   //console.log(id)
 		try {
-		   console.log(aparato)     
-			  const resp = await fetchConToken( `aparatos/${ id }`, aparato, 'PUT' );
+		   //console.log(aparato)     
+			  const resp = await fetchConToken( `aparatos/actualizar/${ id }`, aparato, 'PUT' );
 			  const body = await resp.json();
 			  //console.log(body)
 

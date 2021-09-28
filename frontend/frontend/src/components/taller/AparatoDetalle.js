@@ -43,7 +43,9 @@ export const AparatoDetalle = () => {
           </div>
           <div className="flex flex-col shadow-2xl">
             <label className="col-auto font-bold">Fecha de Retirado</label>
-            <input type="text" className="rounded-md p-2 border border-blue-500" value="$25.000" />
+            <div className="bg-white rounded-md p-2 border border-blue-500">
+            { aparato.fechaSalida }
+            </div>
           </div>
           <div className="flex flex-col md:col-span-2 shadow-2xl">
             <label className="col-auto font-bold">Falla</label>

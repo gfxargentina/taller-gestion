@@ -1,7 +1,7 @@
 import { types } from '../types/types';
 
 const initialState = {
-	//aparatos: [],
+	aparatos: [],
 	aparatoActivo: null
 };
 
@@ -13,11 +13,11 @@ export const aparatoReducer = (state = initialState, action) => {
 				aparatoActivo: action.payload
 			};
 
-		// case types.clientGetAll:
-		//     return {
-		//         ...state,
-		//         clients: [ ...action.payload ]
-		//     }
+		 case types.aparatosGetAll:
+		     return {
+		         ...state,
+		         aparatos: [ ...action.payload ]
+		     }
 
 		 case types.aparatoUpdated:
 		     return {

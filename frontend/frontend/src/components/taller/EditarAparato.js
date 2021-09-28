@@ -31,11 +31,11 @@ export const EditarAparato = () => {
     //busca el cliente del store con el id de activeClient
     //despues le pasa los datos al useForm
      const aparatoCliente = useSelector(state => state.clientes.clients.find(aparato => aparato.id === id ))
-     console.log(aparatoCliente.aparatos)
+     //console.log(aparatoCliente.aparatos)
 
      //trae el id del aparatoActivo
      const idAparato = useSelector(state => state.aparatos.aparatoActivo)
-     console.log(idAparato)
+     //console.log(idAparato)
     
     //busca el aparato del store con el id de aparatoActivo
     //despues le pasa los datos al useForm

@@ -3,6 +3,7 @@ import { fetchConToken } from '../helpers/fetch';
 //import { prepareDates } from "../helpers/prepareDates";
 import Swal from 'sweetalert2';
 import { prepareDates } from '../helpers/prepareDates';
+import { startGetClients } from './clients';
 
 
 //establecer el aparato activo en el store
@@ -100,3 +101,33 @@ const aparatoUpdated = ( aparato ) => ({
    type: types.aparatoUpdated,
    payload: aparato
 });
+
+//accion para inicializar la eliminacion de un aparato
+export const deleteAparato = (id) => { 
+    return async(dispatch, getState) => {
+
+       //const id = getState().clientes.activeClient;
+       
+        try {
+           //console.log(client)     
+              const resp = await fetchConToken( `aparatos/borrar/${ id }`, {}, 'DELETE' );
+              const body = await resp.json();
+              //console.log(body)
+
+              if ( body.ok ) {
+                  dispatch( aparatoDeleted() );
+                  dispatch( startGetClients() );
+              } else {
+               Swal.fire('Error', body.msg , 'error');
+              }
+
+        } catch (error) {
+            console.log(error)
+           
+        }
+    }
+}
+
+const aparatoDeleted = () => ({
+    type: types.aparatoDeleted
+})

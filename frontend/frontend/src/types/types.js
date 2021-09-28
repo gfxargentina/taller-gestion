@@ -24,5 +24,6 @@ export const types = {
 	startNewAparato: '[aparato] Start add new aparato',
 	startEditAparato: '[aparato] Start edit aparato',
 	aparatosGetAll: '[client] get all aparatos',
-	aparatoUpdated: '[aparato] aparato updated'
+	aparatoUpdated: '[aparato] aparato updated',
+	aparatoDeleted: '[aparato] aparato deleted'
 };

@@ -27,6 +27,15 @@ export const aparatoReducer = (state = initialState, action) => {
 		         )
 		     }
 
+		 case types.aparatoDeleted:
+			return {
+				...state,
+				clients: state.aparatos.filter(
+					e => ( e.id !== state.activeClient ) 
+				),
+				aparatoActivo: null
+			}
+
 		default:
 			return state;
 	}

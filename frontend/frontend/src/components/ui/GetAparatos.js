@@ -4,8 +4,8 @@ import {  Link } from "react-router-dom";
 import dayjs from "dayjs";
 import { ClientModal } from '../taller/ClientModal';
 import { NoHayAparatos } from './NoHayAparatos';
-import { aparatoActivo} from '../../actions/aparatos';
-
+import { aparatoActivo, deleteAparato} from '../../actions/aparatos';
+import Swal from 'sweetalert2';
 
 
   
@@ -39,6 +39,29 @@ export const GetAparatos = () => {
     dispatch( aparatoActivo(e.target.name))
     
 }
+
+  const eliminarAparato = (e) => {
+    Swal.fire({
+      title: 'Esta seguro de borrar este aparato?',
+      text: "Esta acción NO podra ser revertida",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Si, Borrar Aparato'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteAparato(e.target.name))
+        Swal.fire({
+          title:'El Aparato fue Borrado de la base de datos!',          
+          icon:'success' 
+        }                   
+        )
+      }
+    })
+    
+  }
 
   
 
@@ -129,7 +152,7 @@ export const GetAparatos = () => {
                               rounded-lg focus:shadow-outline hover:bg-green-500 hover:text-indigo-100">Editar</button>
                               </Link>
                                                         
-                               <button class="h-10 ml-5 px-5 text-indigo-700 transition-colors duration-150 border border-red-500 
+                               <button onClick={ eliminarAparato }  name={ [aparato._id] } class="h-10 ml-5 px-5 text-indigo-700 transition-colors duration-150 border border-red-500 
                               rounded-lg focus:shadow-outline hover:bg-red-500 hover:text-indigo-100">Eliminar</button>
                             </td>                            
                             

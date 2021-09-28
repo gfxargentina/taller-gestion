@@ -44,7 +44,7 @@ export const AparatoDetalle = () => {
           <div className="flex flex-col shadow-2xl">
             <label className="col-auto font-bold">Fecha de Retirado</label>
             <div className="bg-white rounded-md p-2 border border-blue-500">
-            { aparato.fechaSalida }
+            { dayjs(aparato.fechaSalida).format("DD/MM/YYYY") }
             </div>
           </div>
           <div className="flex flex-col md:col-span-2 shadow-2xl">

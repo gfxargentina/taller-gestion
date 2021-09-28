@@ -53,6 +53,7 @@ export const Clientes = () => {
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar',
       confirmButtonText: 'Si, Borrar Cliente'
     }).then((result) => {
       if (result.isConfirmed) {

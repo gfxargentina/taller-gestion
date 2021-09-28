@@ -30,6 +30,15 @@ export const clientReducer = ( state = initialState, action ) => {
                     e => ( e.id === action.payload.id ) ? action.payload : e
                 )
             }
+
+        case types.clientDeleted:
+            return {
+                ...state,
+                clients: state.clients.filter(
+                    e => ( e.id !== state.activeClient ) 
+                ),
+                activeClient: null
+            }
         
     
         default:

@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react'
 import dayjs from "dayjs";
 import { useDispatch, useSelector} from 'react-redux';
-import { startGetClients, setActiveClient } from '../../actions/clients';
+import { startGetClients, setActiveClient, deleteClient } from '../../actions/clients';
 import { NoHayClientes } from './NoHayClientes';
 import {  Link } from "react-router-dom";
 import { ClientModal } from '../taller/ClientModal';
 import { startGetAparatos } from '../../actions/aparatos';
+import Swal from 'sweetalert2';
+
 
 
 
@@ -13,7 +15,7 @@ import { startGetAparatos } from '../../actions/aparatos';
 
 export const Clientes = () => {
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch();  
   const clientes = useSelector( state => state.clientes.clients );
   
   //console.log(clientes)
@@ -41,6 +43,30 @@ export const Clientes = () => {
     dispatch( startGetAparatos(e.target.name))
     
   }
+
+  const deleteClientRedux = (e) => {
+    //console.log(e.target.name)
+    Swal.fire({
+      title: 'Esta seguro de borrar a este cliente?',
+      text: "Esta acción NO podra ser revertida",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Borrar Cliente'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch( deleteClient(e.target.name))
+        Swal.fire({
+          title:'El Cliente fue Borrado de la base de datos!',          
+          icon:'success' 
+        }                   
+        )
+      }
+    })
+     
+  }
+
 
 
     return (
@@ -126,7 +152,7 @@ export const Clientes = () => {
                               rounded-lg focus:shadow-outline hover:bg-green-500 hover:text-indigo-100">Editar</button>
                               </Link>
                                                         
-                               <button class="h-10 ml-5 px-5 text-indigo-700 transition-colors duration-150 border border-red-500 
+                               <button onClick={ deleteClientRedux } name={ person.id } class="h-10 ml-5 px-5 text-indigo-700 transition-colors duration-150 border border-red-500 
                               rounded-lg focus:shadow-outline hover:bg-red-500 hover:text-indigo-100">Eliminar</button>
                             </td>                            
                             

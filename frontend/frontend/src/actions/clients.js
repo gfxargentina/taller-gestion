@@ -44,14 +44,14 @@ const clientsLoaded = ( clients ) => ({
 //accion para inicializar proceso de grabacion de nuevo cliente
 export const startAddNewClient = ( client ) => {
     return async( dispatch, getState ) => {
-            console.log(client)
+            //console.log(client)
 
             const { uid, name } = getState().auth;
 
             try {
                 const resp = await fetchConToken( 'clientes', client , 'POST' );
                 const body = await resp.json();
-                console.log(body)
+                //console.log(body)
 
                 if ( body.ok ) {
                     client.id = body.cliente.id;
@@ -59,8 +59,10 @@ export const startAddNewClient = ( client ) => {
                         _id: uid,
                         name: name
                     }
-                    console.log(client)
+                    //console.log(client)
                     dispatch( startNewClient( client ) );
+                } else {
+                    Swal.fire('Error', body.msg , 'error');
                 }
 
                 
@@ -110,6 +112,35 @@ const clientUpdated = ( client ) => ({
     payload: client
 });
 
+//accion para inicializar la eliminacion de un cliente
+export const deleteClient = (id) => { 
+    return async(dispatch, getState) => {
+
+       //const id = getState().clientes.activeClient;
+       
+        try {
+           //console.log(client)     
+              const resp = await fetchConToken( `clientes/${ id }`, {}, 'DELETE' );
+              const body = await resp.json();
+              //console.log(body)
+
+              if ( body.ok ) {
+                  dispatch( clientDeleted() );
+                  dispatch( startGetClients() )
+              } else {
+               Swal.fire('Error', body.msg , 'error');
+              }
+
+        } catch (error) {
+            console.log(error)
+           
+        }
+    }
+}
+
+const clientDeleted = () => ({
+    type: types.clientDeleted
+})
 
 
 

@@ -17,6 +17,8 @@ export const types = {
 	startEditClient: '[client] Start edit client',
 	//inicializa el proceso de edicion de un cliente
 	clientUpdated: '[client] client updated',
+	//inicializa el proceso de eliminacion de un cliente
+	clientDeleted: '[cliente] Client deleted',
 
 	aparatoActivo: '[aparato]El aparato activo',
 	startNewAparato: '[aparato] Start add new aparato',

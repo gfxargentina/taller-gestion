@@ -108,27 +108,30 @@ export const Clientes = () => {
               <div className="flex flex-col container mx-auto">              
               <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                  <div className="grid grid-cols-5 gap-4 justify-center">
-                  <div className="flex flex-col mt-5">
-                  <label className="mr-3 font-medium text-green-700 text-center">Buscar Cliente por D.N.I:</label>
-                        <input type="text" 
-                                name="term"
-                                placeholder="escriba el D.N.I aqui"
-                                onChange={ e => setTerm(e.target.value)}                                
-                                className="h-10 px-5 mb-5 text-indigo-700 transition-colors duration-150 border border-indigo-500 rounded-lg focus:outline-none"
-                        />
-                  </div>
+                  <div className="grid grid-cols-5 gap-4">
+                   
+                    <div className="flex flex-col mt-5">
+                      <label className="mr-3 font-medium text-green-700 text-center">Buscar Cliente por D.N.I:</label>
+                            <input type="text" 
+                                    name="term"
+                                    placeholder="escriba el D.N.I aqui"
+                                    onChange={ e => setTerm(e.target.value)}                                
+                                    className="h-10 px-5 mb-5 text-indigo-700 transition-colors duration-150 border border-indigo-500 rounded-lg focus:outline-none"
+                            />
+                      </div>
 
                   <div className="flex flex-col mt-5">
-                  <label className="mr-3 font-medium text-green-700 text-center">Buscar Cliente por Apellido y nombre:</label>
-                        <input type="text" 
-                                name={termApellido}
-                                placeholder="escriba el Apellido aqui"
-                                onChange={ e => setTermApellido(e.target.value)}                                
-                                className="h-10 px-5 mb-5 text-indigo-700 transition-colors duration-150 border border-indigo-500 rounded-lg focus:outline-none"
-                        />
-                  </div>
-                  </div>                 
+                      <label className="mr-3 font-medium text-green-700 text-center">Buscar Cliente por Apellido y nombre:</label>
+                            <input type="text" 
+                                    name={termApellido}
+                                    placeholder="escriba el Apellido aqui"
+                                    onChange={ e => setTermApellido(e.target.value)}                                
+                                    className="h-10 px-5 mb-5 text-indigo-700 transition-colors duration-150 border border-indigo-500 rounded-lg focus:outline-none"
+                            />
+                      </div>
+                                  
+                    </div>
+                     
                  
                   <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                   <Link to="/nuevo-cliente">

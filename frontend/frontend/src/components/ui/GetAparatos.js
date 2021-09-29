@@ -21,8 +21,9 @@ export const GetAparatos = () => {
 
    //busca el cliente del store con el id de activeClient
    //despues le pasa los datos al useForm
-   const { aparatos } = useSelector(state => state.clientes.clients.find(client => client.id === id ))
-  //console.log( aparatos )
+   const { aparatos, nombreApellido } = useSelector(state => state.clientes.clients.find(client => client.id === id ))
+    //console.log( aparatos )
+    //console.log(nombreApellido);
 
   
   
@@ -76,6 +77,9 @@ export const GetAparatos = () => {
               <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                   <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                    <div className="text-center mb-5">
+                      <h1 className="font-semibold text-xl text-blue-600" >Aparatos del Cliente {nombreApellido}</h1>
+                    </div>
                   
                     <table className="min-w-full divide-y divide-gray-200">
                       <thead className="bg-gray-50">

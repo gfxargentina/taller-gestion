@@ -98,7 +98,7 @@ export const NuevoAparato = () => {
                             placeholder="ingrese marca y modelo del aparato" 
                             class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus autocomplete required />
                     </div>     
-                    <div>
+                    {/* <div>
                         <label className="block text-gray-700">Fecha de Entregado</label>
                         <input 
                             type="text" 
@@ -107,7 +107,7 @@ export const NuevoAparato = () => {
                             onChange={  handleNewAparatoInput }
                             placeholder="ingrese Fecha de Entregado" 
                             class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus autocomplete  />
-                    </div>
+                    </div> */}
 
                     <div class="mt-4">
                         <label className="block text-gray-700">Falla</label>
@@ -122,7 +122,7 @@ export const NuevoAparato = () => {
                             focus:bg-white focus:outline-none"  />
                     </div>
 
-                    <div class="mt-4">
+                    {/* <div class="mt-4">
                         <label className="block text-gray-700">Presupuesto</label>
                         <input 
                             type="text" 
@@ -133,9 +133,9 @@ export const NuevoAparato = () => {
                             minlength="6" 
                             class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
                             focus:bg-white focus:outline-none"  />
-                    </div>
+                    </div> */}
 
-                    <div class="mt-4">
+                     <div class="mt-4">
                         <label className="block text-gray-700">Observaciones</label>
                         <input 
                             type="text" 
@@ -148,7 +148,7 @@ export const NuevoAparato = () => {
                             focus:bg-white focus:outline-none"  />
                     </div>  
 
-                    <div class="mt-4">
+                    {/* <div class="mt-4">
                         <label className="block text-gray-700">Precio</label>
                         <input 
                             type="text" 
@@ -159,9 +159,9 @@ export const NuevoAparato = () => {
                             minlength="6" 
                             class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
                             focus:bg-white focus:outline-none"  />
-                    </div>
+                    </div> */}
 
-                    <div class="mt-4">
+                    {/* <div class="mt-4">
                         <label className="block text-gray-700">Garantia</label>
                         <input 
                             type="text" 
@@ -172,7 +172,7 @@ export const NuevoAparato = () => {
                             minlength="6" 
                             class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
                             focus:bg-white focus:outline-none"  />
-                    </div>                                     
+                    </div>                                      */}
 
                     <button 
                         type="submit" 

@@ -146,7 +146,13 @@ export const Clientes = () => {
                             scope="col"
                             className="px-6 py-3 text-left text-lg font-medium text-gray-500 uppercase tracking-wider"
                           >
-                            Apellido y nombre
+                            DNI
+                          </th>
+                          <th
+                            scope="col"
+                            className="px-6 py-3 text-left text-lg font-medium text-gray-500 uppercase tracking-wider"
+                          >
+                            Apellido y Nombre
                           </th>
                           <th
                             scope="col"
@@ -158,16 +164,10 @@ export const Clientes = () => {
                             scope="col"
                             className="px-6 py-3 text-left text-lg font-medium text-gray-500 uppercase tracking-wider"
                           >
-                            Fecha de ingreso
+                            Fecha de Ingreso
                           </th>
-                          <th
-                            scope="col"
-                            className="px-6 py-3 text-left text-lg font-medium text-gray-500 uppercase tracking-wider"
-                          >
-                            DNI
-                          </th>
-                          <th scope="col" className="relative px-6 py-3">
-                            <span className="sr-only">Edit</span>
+                          <th scope="col" className="relative px-6 py-3 font-medium text-gray-500 uppercase tracking-wider">
+                            <span className="">Operaciones</span>
                           </th>
                         </tr>
                       </thead>
@@ -181,21 +181,27 @@ export const Clientes = () => {
                             <td className="px-6 py-4 whitespace-nowrap">
                               <div className="flex items-center">                                
                                 <div className="ml-6">
-                                  <div className="text-lg font-medium text-gray-900">{person.nombreApellido}</div>
-                                  <div className="text-base text-gray-500">{person.email}</div>
+                                  <div className="text-lg font-medium text-blue-600">{person.dni}</div>
+                                  {/* <div className="text-base text-gray-500">{person.email}</div> */}
                                 </div>
                               </div>
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap">
-                              <div className="text-lg font-medium text-gray-900">{person.domicilio}</div>
-                              <div className="text-base text-gray-500">{person.telefono}</div>
+                              <div className="text-lg font-medium text-gray-900">{person.nombreApellido}</div>
+                              <div className="text-base text-gray-500">{person.email}</div>
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap">
-                              <span className="px-4 inline-flex text-base leading-8 font-semibold rounded-full bg-green-100 text-green-800">
+                              <div className="text-lg font-medium text-gray-900">{person.domicilio}</div>
+                              <div className="text-base text-gray-500">{person.telefono}</div>
+                              {/* <span className="px-4 inline-flex text-base leading-8 font-semibold rounded-full bg-green-100 text-green-800">
                                 { dayjs(person.fecha).format("DD/MM/YYYY") }
-                              </span>
+                              </span> */}
                             </td>
-                            <td className="px-3 py-3 whitespace-nowrap text-lg font-medium text-gray-500">{person.dni}</td>
+                            <td className="px-3 py-3 whitespace-nowrap">
+                                <span className="px-4 inline-flex text-base leading-8 font-semibold rounded-full bg-green-100 text-green-800">
+                                { dayjs(person.fecha).format("DD/MM/YYYY") }</span>
+                            </td>
+
                             <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                               <Link to="/aparatos">                            
                               <button onClick={ aparatos }  name={ person.id } class="h-10 px-5 text-indigo-700 transition-colors duration-150 border border-indigo-500 

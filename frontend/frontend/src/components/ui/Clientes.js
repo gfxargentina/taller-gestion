@@ -8,7 +8,7 @@ import { ClientModal } from '../taller/ClientModal';
 import { startGetAparatos } from '../../actions/aparatos';
 import Swal from 'sweetalert2';
 
-
+//buscar cliente por DNI  
  function searchTerm(term)  {   
    return function(x){
      //console.log(typeof x);        
@@ -17,6 +17,15 @@ import Swal from 'sweetalert2';
      
    }
  }
+
+ //buscar cliente por apellido
+ function searchTerm2(termApellido)  {   
+  return function(x){
+    //console.log(typeof x);        
+    return x.nombreApellido.toLowerCase().includes(termApellido) || !termApellido;     
+        
+  }
+}
 
 
 
@@ -80,7 +89,8 @@ export const Clientes = () => {
     //search bar
     
     const [data, setData] = useState([]);
-    const [term, setTerm] = useState(''); 
+    const [term, setTerm] = useState('');
+    const [termApellido, setTermApellido] = useState('') 
     
     
 
@@ -98,12 +108,28 @@ export const Clientes = () => {
               <div className="flex flex-col container mx-auto">              
               <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                <h1>Buscar Cliente por DNI o Apellido y Nombre</h1>
+                  <div className="grid grid-cols-5 gap-4 justify-center">
+                  <div className="flex flex-col mt-5">
+                  <label className="mr-3 font-medium text-green-700 text-center">Buscar Cliente por D.N.I:</label>
                         <input type="text" 
                                 name="term"
-                                placeholder="DNI o Apellido y nombre"
-                                onChange={ e => setTerm(e.target.value)}
+                                placeholder="escriba el D.N.I aqui"
+                                onChange={ e => setTerm(e.target.value)}                                
+                                className="h-10 px-5 mb-5 text-indigo-700 transition-colors duration-150 border border-indigo-500 rounded-lg focus:outline-none"
                         />
+                  </div>
+
+                  <div className="flex flex-col mt-5">
+                  <label className="mr-3 font-medium text-green-700 text-center">Buscar Cliente por Apellido y nombre:</label>
+                        <input type="text" 
+                                name={termApellido}
+                                placeholder="escriba el Apellido aqui"
+                                onChange={ e => setTermApellido(e.target.value)}                                
+                                className="h-10 px-5 mb-5 text-indigo-700 transition-colors duration-150 border border-indigo-500 rounded-lg focus:outline-none"
+                        />
+                  </div>
+                  </div>                 
+                 
                   <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
                   <Link to="/nuevo-cliente">
                   <button class="h-10 px-5 mt-5 mb-5 text-indigo-700 transition-colors duration-150 border border-indigo-500 rounded-lg focus:shadow-outline 
@@ -147,7 +173,7 @@ export const Clientes = () => {
                           <tbody className="bg-white  divide-y divide-gray-300">
                         {/* el ? se usa para que cuando llame a la api no de undefined,
                          porque el componente se carga primero y los datos todavia no estan listos */}
-                        {data?.filter(searchTerm(term)).map((person) => (
+                        {data?.filter(searchTerm(term)).filter(searchTerm2(termApellido)).map((person) => (
                           <tr key={person.id}>
                             <td className="px-6 py-4 whitespace-nowrap">
                               <div className="flex items-center">                                

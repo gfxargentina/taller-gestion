@@ -90,7 +90,7 @@ export const GetAparatos = () => {
                             scope="col"
                             className="px-6 py-3 text-left text-lg font-medium text-gray-500 uppercase tracking-wider"
                           >
-                            Falla
+                            Estado
                           </th>
                           <th
                             scope="col"
@@ -131,7 +131,7 @@ export const GetAparatos = () => {
                               </div>
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap">
-                              <div className="text-lg font-medium text-gray-900">{aparato.falla}</div>
+                              <div className="text-lg font-medium text-red-700">SIN REVISAR</div>
                               {/* <div className="text-base text-gray-500">person.telefono</div> */}
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap">

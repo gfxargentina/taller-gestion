@@ -125,7 +125,7 @@ export const Clientes = () => {
                             <input type="text" 
                                     name={termApellido}
                                     placeholder="escriba el Apellido aqui"
-                                    onChange={ e => setTermApellido(e.target.value)}                                
+                                    onChange={ e => setTermApellido(e.target.value.toLowerCase())}                                
                                     className="h-10 px-5 mb-5 text-indigo-700 transition-colors duration-150 border border-indigo-500 rounded-lg focus:outline-none"
                             />
                       </div>

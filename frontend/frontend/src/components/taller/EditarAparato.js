@@ -116,13 +116,13 @@ export const EditarAparato = () => {
         <> 
           
           
-    <section className="flex flex-col md:flex-row h-screen items-center">
-    <div className="bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12
+    <section className="flex flex-col md: min-h-screen items-center xl:w-full">
+    <div className="bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-2/3 min-h-screen px-6 lg:px-16 xl:px-12
                     flex items-center justify-center">
-        <div className="w-max h-100" > 
+        <div className=" " > 
           <h1 className="text-xl text-center md:text-2xl font-bold leading-tight mt-12">Modificar Aparato</h1>
 
-                <form className="w-96  mt-6" onSubmit={ handleEditAparato }>
+                <form className="w-full mt-6" onSubmit={ handleEditAparato }>
                 <div className="mb-4">
                     <label className="block text-gray-700">Fecha de Entrada</label>
                     <DatePicker 
@@ -174,32 +174,32 @@ export const EditarAparato = () => {
                         value={ aparato }
                         onChange={ handleEditAparatoInput }
                         placeholder="Ingrese la marca y modelo del Aparato" 
-                        class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus autocomplete required />
+                        class="w-96 px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus autocomplete required />
                 </div>
 
                 <div class="mt-4">
                     <label className="block text-gray-700">Falla</label>
-                    <input 
+                    <textarea 
                         type="text" 
                         name="falla"
                         value={ falla } 
                         onChange={ handleEditAparatoInput }
                         placeholder="ingrese la falla del Aparato" 
                         minlength="6" 
-                        class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
+                        class="w-full  h-32 px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
                         focus:bg-white focus:outline-none" required />
                 </div>
 
-                <div class="mt-4">
+                <div class="flex-col mt-4">
                     <label className="block text-gray-700">Presupuesto</label>
-                    <input 
+                    <textarea 
                         type="text" 
                         name="presupuesto"
                         value={ presupuesto } 
                         onChange={ handleEditAparatoInput }
                         placeholder="ingrese el presupuesto" 
                         minlength="6" 
-                        class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
+                        class="w-full  h-32 px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
                         focus:bg-white focus:outline-none" required />
                 </div>
 
@@ -230,14 +230,14 @@ export const EditarAparato = () => {
 
                 <div class="mt-4">
                     <label className="block text-gray-700">Observaciones</label>
-                    <input 
+                    <textarea 
                         type="text" 
                         name="observaciones"
                         value={ observaciones } 
                         onChange={ handleEditAparatoInput }
                         placeholder="Ingrese el estado del aparato, si tiene rayaduras, rotura etc.." 
                         minlength="6" 
-                        class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
+                        class="w-full h-32 px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
                         focus:bg-white focus:outline-none" required />
                 </div>                      
 

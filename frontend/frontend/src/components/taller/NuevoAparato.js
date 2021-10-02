@@ -56,10 +56,10 @@ export const NuevoAparato = () => {
 
     return (
         <>
-          <section className="flex flex-col md:flex-row h-screen items-center">
+          <section className="flex flex-col md:flex-row items-center">
 
                
-                <div className="bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 h-screen px-6 lg:px-16 xl:px-12
+                <div className="bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 px-6 lg:px-16 xl:px-12
                     flex items-center justify-center">
 
                 <div className="w-full h-100">
@@ -111,14 +111,14 @@ export const NuevoAparato = () => {
 
                     <div class="mt-4">
                         <label className="block text-gray-700">Falla</label>
-                        <input 
+                        <textarea 
                             type="text" 
                             name="falla"
                             value={ falla } 
                             onChange={  handleNewAparatoInput }
                             placeholder="ingrese la falla del aparato" 
                             minlength="6" 
-                            class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
+                            class="w-full h-24 px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
                             focus:bg-white focus:outline-none"  />
                     </div>
 
@@ -137,14 +137,14 @@ export const NuevoAparato = () => {
 
                      <div class="mt-4">
                         <label className="block text-gray-700">Observaciones</label>
-                        <input 
+                        <textarea 
                             type="text" 
                             name="observaciones"
                             value={ observaciones } 
                             onChange={  handleNewAparatoInput }
                             placeholder="ingrese estado en el que llego el aparato, si tiene remoto, cable 220v, etc" 
                             minlength="6" 
-                            class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
+                            class="w-full h-24 px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
                             focus:bg-white focus:outline-none"  />
                     </div>  
 

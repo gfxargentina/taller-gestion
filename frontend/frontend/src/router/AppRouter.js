@@ -15,6 +15,7 @@ import { NuevoAparato } from '../components/taller/NuevoAparato';
 import { ScreenNuevoAparato } from '../components/taller/ScreenNuevoAparato';
 import { ScreenDetalleAparato } from '../components/taller/ScreenDetalleAparato';
 import { ScreenEditarAparato } from '../components/taller/ScreenEditarAparato';
+import { FacturaAparato } from '../components/ui/FacturaAparato';
 
 
 export const AppRouter = () => {
@@ -64,6 +65,13 @@ export const AppRouter = () => {
 						exact
 						path="/editar-aparato"
 						component={ ScreenEditarAparato }
+						isAuthenticated={!!uid}
+					/>
+
+					<PrivateRoute
+						exact
+						path="/factura-aparato/:aparatoId"
+						component={ FacturaAparato }
 						isAuthenticated={!!uid}
 					/>
 

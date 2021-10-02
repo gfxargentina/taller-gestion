@@ -55,7 +55,7 @@ export const AparatoDetalle = () => {
           <div className="flex flex-col">
             <label className="col-auto font-bold">Fecha de Retirado</label>
             <div className="bg-white shadow-lg rounded-md p-2 border border-blue-500">
-            { dayjs(aparato.fechaSalida).format("DD/MM/YYYY") }
+            { dayjs(aparato.fechaRetirado).format("DD/MM/YYYY") }
             </div>
           </div>
           <div className="flex flex-col md:col-span-2 ">
@@ -72,7 +72,7 @@ export const AparatoDetalle = () => {
           </div>
           <div className="flex flex-col md:col-span-1">
             <label className="col-auto font-bold">Precio</label>            
-            <div className="bg-white shadow-lg rounded-md p-2 w-24 border border-blue-500" >$16.000</div>
+            <div className="bg-white shadow-lg rounded-md p-2 w-24 border border-blue-500" > {aparato.precio} </div>
           </div>          
               <button onClick={ (e) => generarFactura(aparato._id)}  className="h-10 px-5 mt-5 shadow-lg text-indigo-700 transition-colors duration-150 border border-indigo-500 rounded-lg focus:shadow-outline 
                                hover:bg-indigo-500 hover:text-indigo-100" >Generar Factura</button>

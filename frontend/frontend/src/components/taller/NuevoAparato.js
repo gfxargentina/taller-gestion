@@ -27,7 +27,7 @@ export const NuevoAparato = () => {
         
     })
 
-    const {fechaSalida, aparato, falla, presupuesto, observaciones, precio, garantia } = newAparato;
+    const { aparato, falla, observaciones } = newAparato;
     
     //DatePicker
     const [ selectedDate, setSelectedDate ] = useState('');

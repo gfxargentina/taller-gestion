@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 //import DateTimePicker from 'react-datetime-picker';
@@ -6,6 +6,9 @@ import Swal from 'sweetalert2';
 import { useForm } from '../../hooks/useForm';
 import { useHistory } from "react-router-dom";
 import { startEditAparato } from '../../actions/aparatos';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css'
+import dayjs from 'dayjs';
 
 
 
@@ -54,11 +57,29 @@ export const EditarAparato = () => {
         aparato: aparatoModificar.aparato,        
         falla: aparatoModificar.falla,
         presupuesto: aparatoModificar.presupuesto,
-        garantia: aparatoModificar.garantia
+        precio: aparatoModificar.precio,
+        garantia: aparatoModificar.garantia,
+        observaciones: aparatoModificar.observaciones
         
     })
 
-    const { fechaEntrada, fechaSalida, aparato, falla, presupuesto, garantia } = editAparato;
+    const { fechaEntrada, fechaSalida, aparato, falla, presupuesto, precio, garantia, observaciones } = editAparato;
+
+    //DatePicker
+    const [ selectedDate, setSelectedDate ] = useState('');
+    const [ retirado, setRetirado] = useState('');
+    
+    const datePicker = (date) => {
+        setSelectedDate(date);                        
+       //console.log(date)
+        editAparato.fechaEntrada = `${date}`;
+    }  
+
+    const aparatoRetirado = (date) => {
+        setRetirado(date);                        
+       //console.log(date)
+        editAparato.fechaSalida = `${date}`;
+    }  
 
 
     const handleEditAparato = (e) => {
@@ -104,13 +125,19 @@ export const EditarAparato = () => {
                 <form className="w-96  mt-6" onSubmit={ handleEditAparato }>
                 <div className="mb-4">
                     <label className="block text-gray-700">Fecha de Entrada</label>
-                    <input 
+                    <DatePicker 
+                            selected={selectedDate} 
+                            onChange={ datePicker }                                                  
+                            dateFormat="dd/MM/yyyy"
+                            placeholderText={ dayjs(fechaEntrada).format("DD/MM/YYYY") }
+                        />
+                    {/* <input 
                         type="text" 
                         name="fechaEntrada"
                         value={ fechaEntrada }
                         onChange={ handleEditAparatoInput }
                         placeholder="Fecha de entrada del aparato" 
-                        class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus autocomplete required />
+                        class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus autocomplete required /> */}
                 </div>
                 {/* <div className="mb-4">
                     <label className="block text-gray-700">Fecha de ingreso</label>
@@ -124,13 +151,20 @@ export const EditarAparato = () => {
                 
                 <div className="mb-4">
                     <label className="block text-gray-700">Fecha de Salida</label>
-                    <input 
+                    <DatePicker 
+                            selected={retirado} 
+                            onChange={ aparatoRetirado }                                                  
+                            dateFormat="dd/MM/yyyy"
+                            placeholderText={ dayjs(fechaSalida).format("DD/MM/YYYY") }
+                        />
+                    
+                    {/* <input 
                         type="text" 
                         name="fechaSalida"
                         value={ fechaSalida }
                         onChange={ handleEditAparatoInput }
                         placeholder="Fecha de salida del Aparato" 
-                        class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus autocomplete required />
+                        class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autofocus autocomplete required /> */}
                 </div>     
                 <div>
                     <label className="block text-gray-700">Aparato</label>
@@ -167,7 +201,19 @@ export const EditarAparato = () => {
                         minlength="6" 
                         class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
                         focus:bg-white focus:outline-none" required />
-                </div> 
+                </div>
+
+                <div class="mt-4">
+                    <label className="block text-gray-700">Precio</label>
+                    <input 
+                        type="text" 
+                        name="precio"
+                        value={ precio } 
+                        onChange={ handleEditAparatoInput }
+                        placeholder="Ingrese el precio"                          
+                        class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
+                        focus:bg-white focus:outline-none" required />
+                </div>     
 
                 <div class="mt-4">
                     <label className="block text-gray-700">Garantia</label>
@@ -180,7 +226,20 @@ export const EditarAparato = () => {
                         minlength="6" 
                         class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
                         focus:bg-white focus:outline-none" required />
-                </div>                     
+                </div>
+
+                <div class="mt-4">
+                    <label className="block text-gray-700">Observaciones</label>
+                    <input 
+                        type="text" 
+                        name="observaciones"
+                        value={ observaciones } 
+                        onChange={ handleEditAparatoInput }
+                        placeholder="Ingrese el estado del aparato, si tiene rayaduras, rotura etc.." 
+                        minlength="6" 
+                        class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
+                        focus:bg-white focus:outline-none" required />
+                </div>                      
 
                 <button 
                     type="submit" 

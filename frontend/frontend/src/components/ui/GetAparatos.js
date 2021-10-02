@@ -143,7 +143,7 @@ export const GetAparatos = () => {
                                  { dayjs(aparato.fechaEntrada).format("DD/MM/YYYY") }
                               </span>
                             </td>
-                            <td className="px-3 py-3 whitespace-nowrap text-lg font-medium text-gray-500"> { dayjs(aparato.fechaRetirado).format("DD/MM/YYYY") } </td>
+                            <td className="px-3 py-3 whitespace-nowrap text-lg font-medium text-gray-500"> { dayjs(aparato.fechaSalida).format("DD/MM/YYYY") } </td>
                             <td className="px-3 py-3 whitespace-nowrap text-center text-lg font-medium text-gray-500"> {aparato.precio} </td>
                             <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                               <Link to="/detalle-aparato">                             

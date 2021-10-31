@@ -1,7 +1,6 @@
-/*
-    ruta clientes
-    /clientes
-*/
+//  ruta clientes
+  
+
 
 const { Router } = require('express');
 const router = Router();
@@ -13,7 +12,7 @@ const { validarCampos } = require('../middlewares/validar-campos');
 const { validarJWT } = require('../middlewares/validar-jwt');
 
 
-//validar todas las rutas con el middleware JWT
+// validar todas las rutas con el middleware JWT
 router.use( validarJWT );
 
 

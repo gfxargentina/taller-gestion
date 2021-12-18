@@ -6,6 +6,7 @@ import { ClientModal } from "../taller/ClientModal";
 import { NoHayAparatos } from "./NoHayAparatos";
 import { aparatoActivo, deleteAparato } from "../../actions/aparatos";
 import Swal from "sweetalert2";
+import { useState } from "react";
 
 export const GetAparatos = () => {
   const dispatch = useDispatch();
@@ -19,8 +20,6 @@ export const GetAparatos = () => {
   const { aparatos, nombreApellido } = useSelector((state) =>
     state.clientes.clients.find((client) => client.id === id)
   );
-  //console.log( aparatos )
-  //console.log(nombreApellido);
 
   const detalleAparato = (e) => {
     //console.log(e.target.name)
@@ -60,7 +59,7 @@ export const GetAparatos = () => {
           <div className="flex flex-col container mx-auto">
             <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                <div className="shadow overflow-hidden  sm:rounded-lg">
                   <div className="text-center mb-5">
                     <h1 className="font-semibold text-xl text-blue-600">
                       Aparatos del Cliente {nombreApellido}
@@ -110,11 +109,22 @@ export const GetAparatos = () => {
                       {/* el ? se usa para que cuando llame a la api no de undefined,
                          porque el componente se carga primero y los datos todavia no estan listos */}
                       {aparatos?.map((aparato) => (
-                        <tr key={aparato.id}>
+                        <tr
+                          key={aparato.id}
+                          className={
+                            aparato.estado === "SIN REVISAR"
+                              ? "bg-red-500"
+                              : "" || aparato.estado === "REVISADO"
+                              ? "bg-yellow-500"
+                              : "" || aparato.estado === "ENTREGADO"
+                              ? "bg-green-500"
+                              : ""
+                          }
+                        >
                           <td className="px-6 py-4 whitespace-nowrap">
                             <div className="flex items-center">
                               <div className="ml-6">
-                                <div className="text-lg font-medium text-gray-900">
+                                <div className="text-lg font-medium text-white">
                                   {aparato.aparato}
                                 </div>
                                 {/* <div className="text-base text-gray-500">person.email</div> */}
@@ -122,8 +132,8 @@ export const GetAparatos = () => {
                             </div>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-lg font-medium text-red-700">
-                              SIN REVISAR
+                            <div className="text-lg font-medium text-white">
+                              {aparato.estado}
                             </div>
                             {/* <div className="text-base text-gray-500">person.telefono</div> */}
                           </td>
@@ -132,13 +142,13 @@ export const GetAparatos = () => {
                               {dayjs(aparato.fechaEntrada).format("DD/MM/YYYY")}
                             </span>
                           </td>
-                          <td className="px-3 py-3 whitespace-nowrap text-lg font-medium text-gray-500">
+                          <td className="px-3 py-3 whitespace-nowrap text-lg font-medium text-white">
                             {" "}
                             {aparato.fechaSalida
                               ? dayjs(aparato.fechaSalida).format("DD/MM/YYYY")
                               : "No fue Retirado"}{" "}
                           </td>
-                          <td className="px-3 py-3 whitespace-nowrap text-center text-lg font-medium text-gray-500">
+                          <td className="px-3 py-3 whitespace-nowrap text-center text-lg font-medium text-white">
                             {" "}
                             {aparato.precio}{" "}
                           </td>

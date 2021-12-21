@@ -32,7 +32,7 @@ const AparatoSchema = Schema({
   },
   estado: {
     type: String,
-    enum: ["SIN REVISAR", "REVISADO", "ENTREGADO"],
+    enum: ["SIN REVISAR", "REVISADO", "ENTREGADO", "DEVUELTO"],
     default: "SIN REVISAR",
   },
   user: {

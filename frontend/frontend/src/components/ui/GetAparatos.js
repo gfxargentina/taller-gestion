@@ -113,11 +113,13 @@ export const GetAparatos = () => {
                           key={aparato.id}
                           className={
                             aparato.estado === "SIN REVISAR"
-                              ? "bg-red-500"
+                              ? "bg-red-700"
                               : "" || aparato.estado === "REVISADO"
                               ? "bg-yellow-500"
                               : "" || aparato.estado === "ENTREGADO"
-                              ? "bg-green-500"
+                              ? "bg-green-600"
+                              : "" || aparato.estado === "DEVUELTO"
+                              ? "bg-yellow-900"
                               : ""
                           }
                         >
@@ -143,10 +145,9 @@ export const GetAparatos = () => {
                             </span>
                           </td>
                           <td className="px-3 py-3 whitespace-nowrap text-lg font-medium text-white">
-                            {" "}
                             {aparato.fechaSalida
                               ? dayjs(aparato.fechaSalida).format("DD/MM/YYYY")
-                              : "No fue Retirado"}{" "}
+                              : ""}
                           </td>
                           <td className="px-3 py-3 whitespace-nowrap text-center text-lg font-medium text-white">
                             {" "}
@@ -157,7 +158,7 @@ export const GetAparatos = () => {
                               <button
                                 onClick={detalleAparato}
                                 name={[aparato._id]}
-                                class="h-10 px-5 text-indigo-700 transition-colors duration-150 border border-indigo-500 
+                                class="h-10 px-5 text-white transition-colors duration-150 border border-white 
                               rounded-lg focus:shadow-outline hover:bg-indigo-500 hover:text-indigo-100"
                               >
                                 Detalle
@@ -168,7 +169,7 @@ export const GetAparatos = () => {
                               <button
                                 onClick={editarAparato}
                                 name={[aparato._id]}
-                                class="h-10 ml-5 px-5  text-indigo-700 transition-colors duration-150 border border-green-500 
+                                class="h-10 ml-5 px-5  text-white transition-colors duration-150 border border-white 
                               rounded-lg focus:shadow-outline hover:bg-green-500 hover:text-indigo-100"
                               >
                                 Editar
@@ -178,7 +179,7 @@ export const GetAparatos = () => {
                             <button
                               onClick={eliminarAparato}
                               name={[aparato._id]}
-                              class="h-10 ml-5 px-5 text-indigo-700 transition-colors duration-150 border border-red-500 
+                              class="h-10 ml-5 px-5 text-white transition-colors duration-150 border border-white 
                               rounded-lg focus:shadow-outline hover:bg-red-500 hover:text-indigo-100"
                             >
                               Eliminar

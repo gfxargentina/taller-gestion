@@ -150,7 +150,11 @@ export const EditarAparato = () => {
                   selected={retirado}
                   onChange={aparatoRetirado}
                   dateFormat="dd/MM/yyyy"
-                  placeholderText={dayjs(fechaSalida).format("DD/MM/YYYY")}
+                  placeholderText={
+                    fechaSalida
+                      ? dayjs(fechaSalida).format("DD/MM/YYYY")
+                      : "Ingrese Fecha"
+                  }
                 />
 
                 {/* <input 
@@ -236,6 +240,7 @@ export const EditarAparato = () => {
                   <option value="SIN REVISAR">SIN REVISAR</option>
                   <option value="REVISADO">REVISADO</option>
                   <option value="ENTREGADO">ENTREGADO</option>
+                  <option value="DEVUELTO">DEVUELTO</option>
                 </select>
               </div>
 

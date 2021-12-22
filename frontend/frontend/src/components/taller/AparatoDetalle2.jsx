@@ -6,19 +6,13 @@ import { useHistory } from "react-router";
 export const AparatoDetalle = () => {
   const history = useHistory();
 
-  //trae el id de activeClient del store
-  const id = useSelector((state) => state.clientes.activeClient);
-
-  //busca el cliente del store con el id de activeClient
-  const cliente = useSelector((state) =>
-    state.clientes.clients.find((client) => client.id === id)
-  );
-  //console.log(cliente.aparatos);
-
   //trae el id del aparato del store
   const aparatoid = useSelector((state) => state.aparatos.aparatoActivo);
-  //busca el aparato del cliente
-  const aparato = cliente.aparatos.find((aparato) => aparato._id === aparatoid);
+
+  const aparatos = useSelector((state) => state.aparatos.aparatos);
+
+  //busca el aparato del store
+  const aparato = aparatos.find((aparato) => aparato.id === aparatoid);
   //console.log(aparato);
 
   const generarFactura = (e) => {

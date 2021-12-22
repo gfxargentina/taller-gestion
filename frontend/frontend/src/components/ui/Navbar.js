@@ -21,6 +21,10 @@ export const Navbar = () => {
     history.push("/aparatos2");
   };
 
+  const inicio = () => {
+    history.push("/");
+  };
+
   const handleLogout = () => {
     dispatch(startLogout());
   };
@@ -39,9 +43,12 @@ export const Navbar = () => {
                     </div>
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">
-                        <button className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">
-                          Inicio
-                        </button>
+                        <a
+                          onClick={() => inicio()}
+                          className="text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700 active:bg-red-600 cursor-pointer"
+                        >
+                          Clientes
+                        </a>
 
                         <button
                           onClick={() => getAparatos()}

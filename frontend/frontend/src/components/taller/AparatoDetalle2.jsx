@@ -13,7 +13,7 @@ export const AparatoDetalle = () => {
 
   //busca el aparato del store
   const aparato = aparatos.find((aparato) => aparato.id === aparatoid);
-  //console.log(aparato);
+  console.log(aparato);
 
   const generarFactura = (e) => {
     //console.log(e);
@@ -22,69 +22,80 @@ export const AparatoDetalle = () => {
 
   return (
     <>
-      <div className="flex max-w-6xl mx-auto items-start justify-center p-5">
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2">
-          <div className="flex flex-col ">
-            <label className="text-center font-bold">Fecha de Entrada</label>
-            {/* <input type="text" className="rounded-md p-2" value={ dayjs(aparato.fechaEntrada).format("DD/MM/YYYY") } /> */}
-            <div className="flex-none shadow-lg  bg-white rounded-md p-2 text-center border border-blue-500">
-              {dayjs(aparato.fechaEntrada).format("DD/MM/YYYY")}
+      <div className="flex w-full h-screen justify-center items-start p-5">
+        <div className="w-full max-w-6xl">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2">
+            <div className="flex flex-col md:col-span-2">
+              <label className="text-center font-bold">Cliente</label>
+              <h2 className="shadow-lg  bg-white rounded-md p-2 text-center border border-blue-500">
+                {aparato.cliente.nombreApellido}
+              </h2>
             </div>
-          </div>
-          <div className="flex flex-col ">
-            <label className="text-center font-bold">Aparato</label>
-            {/* <input type="text" className="rounded-md p-2" value={ aparato.aparato } /> */}
-            <div className="bg-white shadow-lg rounded-md p-2 border border-blue-500">
-              {aparato.aparato}
+            <div className="flex flex-col md:col-span-2 ">
+              <label className="text-center font-bold">Aparato</label>
+              {/* <input type="text" className="rounded-md p-2" value={ aparato.aparato } /> */}
+              <div className="bg-white shadow-lg rounded-md p-2 border border-blue-500">
+                {aparato.aparato}
+              </div>
             </div>
-          </div>
-          <div className="flex flex-col ">
-            <label className="text-center font-bold">Estado</label>
-            <div className="bg-white shadow-lg rounded-md p-2 text-center border border-blue-500">
-              {aparato.estado}
+
+            <div className="flex flex-col ">
+              <label className="text-center font-bold">Fecha de Entrada</label>
+              {/* <input type="text" className="rounded-md p-2" value={ dayjs(aparato.fechaEntrada).format("DD/MM/YYYY") } /> */}
+              <div className="flex-none shadow-lg  bg-white rounded-md p-2 text-center border border-blue-500">
+                {dayjs(aparato.fechaEntrada).format("DD/MM/YYYY")}
+              </div>
             </div>
-          </div>
-          <div className="flex flex-col">
-            <label className="col-auto font-bold">Fecha de Retirado</label>
-            <div className="bg-white shadow-lg rounded-md p-2 border border-blue-500">
-              {dayjs(aparato.fechaRetirado).format("DD/MM/YYYY")}
+
+            <div className="flex flex-col ">
+              <label className="text-center font-bold">Estado</label>
+              <div className="bg-white shadow-lg rounded-md p-2 text-center border border-blue-500">
+                {aparato.estado}
+              </div>
             </div>
-          </div>
-          <div className="flex flex-col md:col-span-2 ">
-            <label className="col-auto font-bold">Falla</label>
-            <div className="bg-white shadow-lg rounded-md p-2 h-24 w-auto border border-blue-500">
-              {" "}
-              {aparato.falla}{" "}
+            <div className="flex flex-col">
+              <label className="col-auto font-bold">Fecha de Retirado</label>
+              <div className="bg-white shadow-lg rounded-md p-2 border border-blue-500">
+                {dayjs(aparato.fechaRetirado).format("DD/MM/YYYY")}
+              </div>
             </div>
-          </div>
-          <div className="flex flex-col md:col-span-2 ">
-            <label className="font-bold">Observaciones</label>
-            <div className="bg-white shadow-lg rounded-md p-2 h-24 w-auto border border-blue-500">
-              {" "}
-              {aparato.observaciones}{" "}
+
+            <div className="flex flex-col md:col-span-2 ">
+              <label className="col-auto font-bold">Falla</label>
+              <div className="bg-white shadow-lg rounded-md p-2 h-24 w-auto border border-blue-500">
+                {" "}
+                {aparato.falla}{" "}
+              </div>
             </div>
-          </div>
-          <div className="flex flex-col md:col-span-2 ">
-            <label className="col-auto font-bold">Presupuesto</label>
-            <div className="bg-white shadow-lg rounded-md p-2 h-24 w-auto border border-blue-500">
-              {" "}
-              {aparato.presupuesto}{" "}
+            <div className="flex flex-col md:col-span-2 ">
+              <label className="font-bold">Observaciones</label>
+              <div className="bg-white shadow-lg rounded-md p-2 h-24 w-auto border border-blue-500">
+                {" "}
+                {aparato.observaciones}{" "}
+              </div>
             </div>
-          </div>
-          <div className="flex flex-col md:col-span-1">
-            <label className="col-auto font-bold">Precio</label>
-            <div className="bg-white shadow-lg rounded-md p-2 w-24 border border-blue-500">
-              {" "}
-              {aparato.precio}{" "}
+            <div className="flex flex-col md:col-span-2 ">
+              <label className="col-auto font-bold">Presupuesto</label>
+              <div className="bg-white shadow-lg rounded-md p-2 h-24 w-auto border border-blue-500">
+                {" "}
+                {aparato.presupuesto}{" "}
+              </div>
             </div>
-          </div>
-          <button
-            onClick={(e) => generarFactura(aparato._id)}
-            className="h-10 px-5 mt-5 shadow-lg text-indigo-700 transition-colors duration-150 border border-indigo-500 rounded-lg focus:shadow-outline 
+            <div className="flex flex-col md:col-span-1">
+              <label className="col-auto font-bold">Precio</label>
+              <div className="bg-white shadow-lg rounded-md p-2 w-24 border border-blue-500">
+                {" "}
+                {aparato.precio}{" "}
+              </div>
+            </div>
+            <button
+              onClick={(e) => generarFactura(aparato._id)}
+              className="h-10 px-5 mt-5 shadow-lg text-indigo-700 transition-colors duration-150 border border-indigo-500 rounded-lg focus:shadow-outline 
                                hover:bg-indigo-500 hover:text-indigo-100"
-          >
-            Generar Factura
-          </button>
+            >
+              Generar Factura
+            </button>
+          </div>
         </div>
       </div>
     </>

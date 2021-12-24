@@ -170,14 +170,14 @@ export const GetAllAparatos = () => {
                               </button>
                             </Link>
 
-                            <button
+                            {/* <button
                               onClick={eliminarAparato}
                               name={[aparato._id]}
                               class="h-10 ml-5 px-5 text-white transition-colors duration-150 border border-white 
                               rounded-lg focus:shadow-outline hover:bg-red-500 hover:text-indigo-100"
                             >
                               Eliminar
-                            </button>
+                            </button> */}
                           </td>
                         </tr>
                       ))}

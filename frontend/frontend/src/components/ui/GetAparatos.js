@@ -150,8 +150,7 @@ export const GetAparatos = () => {
                               : ""}
                           </td>
                           <td className="px-3 py-3 whitespace-nowrap text-center text-lg font-medium text-white">
-                            {" "}
-                            {aparato.precio}{" "}
+                            ${aparato.precio}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <Link to="/detalle-aparato">

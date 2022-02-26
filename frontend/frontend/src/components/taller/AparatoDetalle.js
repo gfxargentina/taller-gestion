@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import dayjs from "dayjs";
-import { useHistory } from "react-router";
+import { useHistory, Link } from "react-router";
 
 export const AparatoDetalle = () => {
   const history = useHistory();
@@ -24,6 +24,7 @@ export const AparatoDetalle = () => {
   const generarFactura = (e) => {
     //console.log(e);
     history.push(`/factura-aparato/${e}`);
+    //window.open(`/factura-aparato/${e}`);
   };
 
   return (

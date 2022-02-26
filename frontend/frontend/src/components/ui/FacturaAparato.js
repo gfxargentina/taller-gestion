@@ -24,7 +24,7 @@ export const FacturaAparato = () => {
     <div className="container p-8  max-w-4xl mx-auto justify-center">
       <Link
         to="/"
-        className="px-5 py-1 mt-5 shadow-lg text-indigo-700 transition-colors duration-150 border border-indigo-500 rounded-lg focus:shadow-outline 
+        className="print:hidden px-5 py-1 mt-5 shadow-lg text-indigo-700 transition-colors duration-150 border border-indigo-500 rounded-lg focus:shadow-outline 
                                hover:bg-green-500 hover:text-indigo-100"
       >
         Volver al inicio

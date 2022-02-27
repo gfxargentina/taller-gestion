@@ -229,6 +229,7 @@ export const EditarAparato2 = () => {
                 >
                   <option value="SIN REVISAR">SIN REVISAR</option>
                   <option value="REVISADO">REVISADO</option>
+                  <option value="TERMINADO">TERMINADO</option>
                   <option value="ENTREGADO">ENTREGADO</option>
                   <option value="DEVUELTO">DEVUELTO</option>
                 </select>

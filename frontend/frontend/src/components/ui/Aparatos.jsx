@@ -109,11 +109,13 @@ export const GetAllAparatos = () => {
                             aparato.estado === "SIN REVISAR"
                               ? "bg-red-700"
                               : "" || aparato.estado === "REVISADO"
+                              ? "bg-orange-400"
+                              : "" || aparato.estado === "TERMINADO"
                               ? "bg-yellow-500"
                               : "" || aparato.estado === "ENTREGADO"
                               ? "bg-green-600"
                               : "" || aparato.estado === "DEVUELTO"
-                              ? "bg-yellow-900"
+                              ? "bg-stone-700"
                               : ""
                           }
                         >

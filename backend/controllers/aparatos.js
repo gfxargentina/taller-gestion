@@ -42,7 +42,7 @@ const nuevoAparato = async (req, res = response) => {
 //obtener todos los aparatos
 const getAparatos = async (req, res = response) => {
   const aparatos = await Aparato.find()
-    .populate("cliente", "nombreApellido")
+    .populate("cliente", "nombreApellido domicilio telefono email")
     .sort([["fechaSalida", -1]]);
 
   res.status(200).json({

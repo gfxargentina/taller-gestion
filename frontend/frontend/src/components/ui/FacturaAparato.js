@@ -10,17 +10,22 @@ export const FacturaAparato = () => {
   const { aparatoId } = useParams();
   //console.log(aparatoId);
 
-  //trae el id de activeClient
-  const id = useSelector((state) => state.clientes.activeClient);
+  const aparatos = useSelector((state) => state.aparatos.aparatos);
 
-  //busca el cliente del store con el id de activeClient
-  const cliente = useSelector((state) =>
-    state.clientes.clients.find((client) => client.id === id)
-  );
-
-  //busca el aparato del cliente
-  const aparato = cliente.aparatos.find((aparato) => aparato._id === aparatoId);
+  //busca el aparato del store
+  const aparato = aparatos.find((aparato) => aparato.id === aparatoId);
   console.log(aparato);
+  //trae el id de activeClient
+  // const id = useSelector((state) => state.clientes.activeClient);
+
+  // //busca el cliente del store con el id de activeClient
+  // const cliente = useSelector((state) =>
+  //   state.clientes.clients.find((client) => client.id === id)
+  // );
+
+  // //busca el aparato del cliente
+  // const aparato = cliente.aparatos.find((aparato) => aparato._id === aparatoId);
+  // console.log(aparato);
 
   return (
     <div className="container p-8  max-w-4xl mx-auto justify-center">
@@ -49,9 +54,9 @@ export const FacturaAparato = () => {
       <div className="flex justify-around mt-2  px-3  ">
         <div className="">
           <h2 className="text-indigo-600 font-bold mb-3">FACTURA PARA:</h2>
-          <h2 className="font-semibold"> {cliente.nombreApellido} </h2>
-          <h3> {cliente.domicilio} </h3>
-          <h3> {cliente.telefono} </h3>
+          <h2 className="font-semibold"> {aparato.cliente.nombreApellido} </h2>
+          <h3> {aparato.cliente.domicilio} </h3>
+          <h3> {aparato.cliente.telefono} </h3>
         </div>
 
         <div className="bg-blue-500 px-8 text-white">

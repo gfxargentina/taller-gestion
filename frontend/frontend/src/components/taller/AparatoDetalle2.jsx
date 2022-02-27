@@ -8,12 +8,13 @@ export const AparatoDetalle = () => {
 
   //trae el id del aparato del store
   const aparatoid = useSelector((state) => state.aparatos.aparatoActivo);
+  console.log(aparatoid);
 
   const aparatos = useSelector((state) => state.aparatos.aparatos);
 
   //busca el aparato del store
   const aparato = aparatos.find((aparato) => aparato.id === aparatoid);
-  console.log(aparato);
+  //console.log(aparato);
 
   const generarFactura = (e) => {
     //console.log(e);
@@ -89,7 +90,7 @@ export const AparatoDetalle = () => {
               </div>
             </div>
             <button
-              onClick={(e) => generarFactura(aparato._id)}
+              onClick={(e) => generarFactura(aparatoid)}
               className="h-10 px-5 mt-5 shadow-lg text-indigo-700 transition-colors duration-150 border border-indigo-500 rounded-lg focus:shadow-outline 
                                hover:bg-indigo-500 hover:text-indigo-100"
             >

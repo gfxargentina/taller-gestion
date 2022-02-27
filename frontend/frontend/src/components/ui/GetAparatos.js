@@ -116,6 +116,8 @@ export const GetAparatos = () => {
                               ? "bg-red-700"
                               : "" || aparato.estado === "REVISADO"
                               ? "bg-yellow-500"
+                              : "" || aparato.estado === "TERMINADO"
+                              ? "bg-orange-500"
                               : "" || aparato.estado === "ENTREGADO"
                               ? "bg-green-600"
                               : "" || aparato.estado === "DEVUELTO"

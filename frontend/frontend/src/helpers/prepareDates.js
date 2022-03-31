@@ -1,13 +1,8 @@
-import moment from 'moment'
+import moment from "moment";
 
-
-export const prepareDates = ( clients = [] ) => {
-    //console.log(clients)
-
-    return clients.map(
-        (e) => ({
-            ...e,
-            fecha: moment(e.fecha).toDate()
-        })
-    )
-}
+export const prepareDates = (clients = []) => {
+  return clients.map((e) => ({
+    ...e,
+    fecha: moment(e.fecha).toDate(),
+  }));
+};

@@ -17,7 +17,7 @@ const { validarJWT } = require("../middlewares/validar-jwt");
 router.use(validarJWT);
 
 //obtener clientes
-router.get("/", getClientes);
+router.get("/clientes", getClientes);
 
 //crear un nuevo cliente
 router.post(

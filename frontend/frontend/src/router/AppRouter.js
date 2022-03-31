@@ -17,7 +17,7 @@ import { ScreenDetalleAparato } from "../components/taller/ScreenDetalleAparato"
 import { ScreenEditarAparato } from "../components/taller/ScreenEditarAparato";
 import { FacturaAparato } from "../components/ui/FacturaAparato";
 import { AparatosScreen } from "../components/taller/AparatosScreen";
-import { AparatoDetalle } from "../components/taller/AparatoDetalle2";
+import { ScreenDetalleAparato2 } from "../components/taller/ScreenDetalleAparato2";
 import { EditarAparato2 } from "../components/taller/EditarAparato2";
 
 export const AppRouter = () => {
@@ -45,7 +45,7 @@ export const AppRouter = () => {
 
           <PrivateRoute
             exact
-            path="/"
+            path="/clientes"
             component={TallerScreen}
             isAuthenticated={!!uid}
           />
@@ -95,7 +95,7 @@ export const AppRouter = () => {
           <PrivateRoute
             exact
             path="/detalle-aparato2"
-            component={AparatoDetalle}
+            component={ScreenDetalleAparato2}
             isAuthenticated={!!uid}
           />
 
@@ -127,7 +127,7 @@ export const AppRouter = () => {
             isAuthenticated={!!uid}
           />
 
-          <Redirect to="/" />
+          <Redirect to="/clientes" />
         </Switch>
       </div>
     </Router>

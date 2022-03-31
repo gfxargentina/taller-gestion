@@ -2,20 +2,91 @@ const { response } = require("express");
 const Cliente = require("../models/Cliente");
 
 //obtener todos los clientes
-const getClientes = async (req, res = response) => {
-  //busca todos los clientes con aparatos
-  const clientes = await Cliente.find({})
-    .populate(
-      "aparatos",
-      "fechaEntrada fechaSalida aparato falla presupuesto observaciones precio estado garantia"
-    )
-    .sort([["fecha", -1]]);
+// const getClientes = async (req, res = response) => {
+//   const page = parseInt(req.query.page || "0");
+//   //regex para buscar todas las letras que esten al principio del campo nombreApellido
+//   //const nombre = new RegExp("^" + req.query.nombre);
+//   const nombre = req.query.nombre;
+//   const pageSize = 10;
+//   //para contar el numero de documentos de la bd
+//   const total = await Cliente.countDocuments({});
 
-  res.status(200).json({
-    ok: true,
-    msg: "Devuelve todos los clientes y sus aparatos",
-    clientes,
-  });
+//   //busca todos los clientes con aparatos
+//   const clientes = await Cliente.find(
+//     nombre ? { $text: { $search: nombre } } : {}
+//   )
+//     .sort([["fecha", -1]])
+//     .skip(pageSize * page)
+//     .limit(pageSize)
+//     .populate(
+//       "aparatos",
+//       "fechaEntrada fechaSalida aparato falla presupuesto observaciones precio estado garantia"
+//     );
+//   //const clientes = await Cliente.find({
+//   //$text: { $search: nombre },
+//   //}).populate("aparatos");
+//   res.status(200).json({
+//     ok: true,
+//     msg: "Devuelve todos los clientes y sus aparatos",
+//     clientes,
+//     //devuelve el total de paginas
+//     totalPages: Math.ceil(total / pageSize),
+//   });
+// };
+
+const getClientes = async (req, res = response) => {
+  const page = parseInt(req.query.page || "0");
+  const getNombre = req.query.nombre;
+  const nombre = getNombre?.toLowerCase();
+  const pageSize = 10;
+  //para contar el numero de documentos de la bd
+  const total = await Cliente.countDocuments({});
+
+  try {
+    if (nombre) {
+      clientes = await Cliente.find(
+        nombre ? { $text: { $search: nombre } } : {}
+      )
+        .sort([["fecha", -1]])
+        .skip(pageSize * page)
+        .limit(pageSize)
+        .populate(
+          "aparatos",
+          "fechaEntrada fechaSalida aparato falla presupuesto observaciones precio estado garantia"
+        );
+      //const clientes = await Cliente.find({
+      //$text: { $search: nombre },
+      //}).populate("aparatos");
+      res.status(200).json({
+        ok: true,
+        msg: "Devuelve todos los clientes y sus aparatos",
+        clientes,
+        //devuelve el total de paginas
+        totalPages: Math.ceil(total / pageSize),
+      });
+    } else {
+      const clientes = await Cliente.find({})
+        .sort([["fecha", -1]])
+        .skip(pageSize * page)
+        .limit(pageSize)
+        .populate(
+          "aparatos",
+          "fechaEntrada fechaSalida aparato falla presupuesto observaciones precio estado garantia"
+        );
+      //const clientes = await Cliente.find({
+      //$text: { $search: nombre },
+      //}).populate("aparatos");
+      res.status(200).json({
+        ok: true,
+        msg: "Devuelve todos los clientes y sus aparatos",
+        clientes,
+        //devuelve el total de paginas
+        totalPages: Math.ceil(total / pageSize),
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 //crear cliente

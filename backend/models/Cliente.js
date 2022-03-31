@@ -35,6 +35,8 @@ const ClienteSchema = Schema({
   },
 });
 
+ClienteSchema.index({ nombreApellido: "text" });
+
 //quitar __v, _id de la vista JSON, esto no afecta a la bd
 ClienteSchema.method("toJSON", function () {
   //con this.toObject tiene acceso a cada una de las propiedades de ClienteSchema,

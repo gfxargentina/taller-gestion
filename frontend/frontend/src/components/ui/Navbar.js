@@ -22,7 +22,7 @@ export const Navbar = () => {
   };
 
   const inicio = () => {
-    history.push("/");
+    history.push("/clientes");
   };
 
   const handleLogout = () => {

@@ -19,7 +19,6 @@ export const AparatoDetalle = () => {
   const aparatoid = useSelector((state) => state.aparatos.aparatoActivo);
   //busca el aparato del cliente
   const aparato = cliente.aparatos.find((aparato) => aparato._id === aparatoid);
-  //console.log(aparato);
 
   const generarFactura = (e) => {
     //console.log(e);
@@ -55,7 +54,7 @@ export const AparatoDetalle = () => {
             <div className="flex flex-col">
               <label className="col-auto font-bold">Fecha de Retirado</label>
               <div className="bg-white shadow-lg rounded-md p-2 border border-blue-500">
-                {dayjs(aparato.fechaRetirado).format("DD/MM/YYYY")}
+                {dayjs(aparato.fechaSalida).format("DD/MM/YYYY")}
               </div>
             </div>
             <div className="flex flex-col md:col-span-2 ">

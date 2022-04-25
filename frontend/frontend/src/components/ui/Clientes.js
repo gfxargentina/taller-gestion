@@ -5,69 +5,127 @@ import {
   startGetClients,
   setActiveClient,
   deleteClient,
+  getClientByDni,
+  getClientsByPage,
 } from "../../actions/clients";
 import { NoHayClientes } from "./NoHayClientes";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ClientModal } from "../taller/ClientModal";
 import { startGetAparatos } from "../../actions/aparatos";
 import Swal from "sweetalert2";
-import useDebounce from "../../hooks/useDebounce";
-
+import ReactPaginate from "react-paginate";
 //buscar cliente por DNI
-function searchTerm(term) {
-  return function (x) {
-    return x.dni.toString().includes(term);
-  };
-}
+// function searchTerm(term) {
+//   return function (x) {
+//     return x.dni?.toString().includes(term);
+//   };
+// }
 
-//buscar cliente por apellido
-function searchTerm2(termApellido) {
-  return function (x) {
-    return (
-      x.nombreApellido.toLowerCase().includes(termApellido) || !termApellido
-    );
-  };
-}
+// //buscar cliente por apellido
+// function searchTerm2(termApellido) {
+//   return function (x) {
+//     return (
+//       x.nombreApellido?.toLowerCase().includes(termApellido) || !termApellido
+//     );
+//   };
+// }
 
 export const Clientes = () => {
   const dispatch = useDispatch();
-  //const location = useLocation();
-  //console.log(location);
-  const clientes = useSelector((state) => state.clientes.clients);
-  const numeroPaginasTotales = useSelector(
-    (state) => state.clientes.paginaTotales
-  );
 
-  const [termApellido, setTermApellido] = useState("");
-  const nombreyApellido = `?nombre=${termApellido}`;
-  const [pagina, setPagina] = useState("0");
-  const page = `?page=${pagina}`;
+  const { clients, numberOfPages } = useSelector((state) => state.clientes);
 
-  const paginasTotales = numeroPaginasTotales;
+  const [searchName, setSearchName] = useState("");
+  const [dni, setDni] = useState("");
 
-  const paginas = new Array(paginasTotales).fill(null).map((v, i) => i);
+  const [page, setPage] = useState(1);
 
-  const handleApellido = (e) => {
-    //console.log(e.target.value);
-    // if (e.target.value.length > 4) {
-    //   setTermApellido(e.target.value.toLowerCase());
-    // }
-    setTimeout(() => {
-      setTermApellido(e.target.value.toLowerCase());
-    }, 1500);
+  // const clientesArr2 = [
+  //   ...new Set(
+  //     Object.values(clientes).map((el) => {
+  //       return el;
+  //     })
+  //   ),
+  // ];
+
+  // const [termApellido, setTermApellido] = useState("");
+
+  // // const nombreyApellido = `?nombre=${termApellido}`;
+
+  // //paginacion
+  // const [pageNumber, setPageNumber] = useState(0);
+
+  // const clientsPerPage = 20;
+  // const pagesVisited = pageNumber * clientsPerPage;
+
+  // const displayClients = clientesArr2
+  //   .filter((cliente) => {
+  //     if (termApellido === "") {
+  //       return cliente;
+  //     }
+  //     if (cliente.nombreApellido.includes(termApellido)) {
+  //       console.log(cliente);
+  //       return cliente;
+  //     }
+  //     return false;
+  //   })
+  //   .slice(pagesVisited, pagesVisited + clientsPerPage);
+
+  // const pageCount = Math.ceil(
+  //   clientesArr2.filter((cliente) => {
+  //     if (termApellido === "") {
+  //       return cliente;
+  //     } else if (termApellido === cliente.nombreApellido) {
+  //       return cliente;
+  //     }
+  //     return false;
+  //   }).length / clientsPerPage
+  // );
+  // console.log(pageCount);
+
+  //const pageCount = Math.ceil(clientes.length / clientsPerPage)
+
+  const changePage = ({ selected }) => {
+    setPage(selected + 1);
+  };
+
+  const handleSearchDni = (e) => {
+    e.preventDefault();
+
+    if (e.target.value.length > 6) {
+      //setDni(e.target.value);
+      setTimeout(() => {
+        setDni(e.target.value);
+      }, 500);
+    }
+  };
+
+  const handleNombreSearch = (e) => {
+    e.preventDefault();
+
+    if (e.target.value.length > 4) {
+      setTimeout(() => {
+        setSearchName(e.target.value);
+      }, 500);
+    }
   };
 
   //const debouncedQuery = useDebounce(input, 1000);
 
   useEffect(() => {
-    if (nombreyApellido) {
-      dispatch(startGetClients(nombreyApellido));
+    if (searchName) {
+      return dispatch(startGetClients(searchName));
+    } else if (dni) {
+      return dispatch(getClientByDni(dni));
+    } else if (page) {
+      return dispatch(getClientsByPage(page));
     }
-    dispatch(startGetClients(page));
+
+    dispatch(startGetClients());
 
     //no se le pasa un objeto solo como dependencia, usar objeto.props para
     //que no haga un loop infinito
-  }, [dispatch, clientes.aparatos, nombreyApellido, page]);
+  }, [dispatch, searchName, dni, page]);
 
   const editClientComponent = (e) => {
     // le mande el id del cliente a activeClient en el store
@@ -100,18 +158,9 @@ export const Clientes = () => {
     });
   };
 
-  //search bar
-
-  const [data, setData] = useState([]);
-  const [term, setTerm] = useState("");
-
-  useEffect(() => {
-    setData(clientes);
-  }, [clientes]);
-
   return (
     <>
-      {data?.length > 0 ? (
+      {clients?.length > 0 ? (
         <div>
           <div className="flex flex-col container mx-auto">
             <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -123,9 +172,9 @@ export const Clientes = () => {
                     </label>
                     <input
                       type="text"
-                      name="term"
+                      name="dni"
                       placeholder="escriba el D.N.I aqui"
-                      onChange={(e) => setTerm(e.target.value)}
+                      onChange={(e) => handleSearchDni(e)}
                       className="h-10 px-5 mb-5 text-indigo-700 transition-colors duration-150 border border-indigo-500 rounded-lg focus:outline-none"
                     />
                   </div>
@@ -136,13 +185,9 @@ export const Clientes = () => {
                     </label>
                     <input
                       type="text"
-                      name={termApellido}
+                      //name={termApellido}
                       placeholder="escriba el Apellido aqui"
-                      onChange={
-                        //(e) =>
-                        //setTermApellido(e.target.value.toLowerCase())
-                        handleApellido
-                      }
+                      onChange={(e) => handleNombreSearch(e)}
                       className="h-10 px-5 mb-5 text-indigo-700 transition-colors duration-150 border border-indigo-500 rounded-lg focus:outline-none"
                     />
                   </div>
@@ -197,10 +242,8 @@ export const Clientes = () => {
                     <tbody className="bg-white  divide-y divide-gray-300">
                       {/* el ? se usa para que cuando llame a la api no de undefined,
                          porque el componente se carga primero y los datos todavia no estan listos */}
-                      {data
-                        ?.filter(searchTerm(term))
-                        .filter(searchTerm2(termApellido))
-                        .map((person) => (
+                      {clients.map((person) => (
+                        <>
                           <tr key={person.id}>
                             <td className="px-6 py-4 whitespace-nowrap">
                               <div className="flex items-center">
@@ -270,27 +313,34 @@ export const Clientes = () => {
                               </button>
                             </td>
                           </tr>
-                        ))}
+                        </>
+                      ))}
                     </tbody>
                   </table>
                 </div>
               </div>
             </div>
-            <div className="mt-5 mb-5 flex items-center flex-row justify-center">
-              <p className="mr-5 font-bold">Paginas</p>
-              {paginas.map((pageIndex) => (
-                <>
-                  <div className="">
-                    <button
-                      className="mr-5 text-lg border-2 px-2 border-cyan-400"
-                      key={pageIndex}
-                      onClick={() => setPagina(pageIndex)}
-                    >
-                      {pageIndex + 1}
-                    </button>
-                  </div>
-                </>
-              ))}
+            <div>
+              <ReactPaginate
+                previousLabel={"anterior"}
+                nextLabel={"siguiente"}
+                pageCount={numberOfPages}
+                onPageChange={changePage}
+                containerClassName={
+                  "mt-5 mb-5 flex items-center flex-row justify-center"
+                }
+                previousLinkClassName={
+                  "mr-3 p-2 rounded border border-blue-300 hover:border-blue-500"
+                }
+                nextLinkClassName={
+                  "ml-3 p-2 rounded border border-blue-300 hover:border-blue-500"
+                }
+                pageClassName={
+                  "mr-3 p-1 px-2 rounded border border-blue-300 hover:border-blue-700"
+                }
+                disabledLinkClassName={""}
+                activeClassName={"bg-cyan-600 text-white"}
+              />
             </div>
           </div>
         </div>

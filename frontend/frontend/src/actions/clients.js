@@ -9,45 +9,65 @@ export const setActiveClient = (client) => ({
   payload: client,
 });
 
-//traer todos los clientes de db
-export const startGetClients = (page, nombre) => {
-  return async (dispatch) => {
-    try {
-      if (nombre) {
-        const resp = await fetchConToken(`clientes/clientes${nombre}`);
-        const body = await resp.json();
+//trae 1 cliente por dni
+export const getClientByDni = (dni) => async (dispatch) => {
+  try {
+    const resp = await fetchConToken(`clientes/clientes?numeroDni=${dni}`);
+    const body = await resp.json();
+    const clients = prepareDates(body.data);
 
-        const clients = prepareDates(body.clientes);
-        const paginasTotales = body.totalPages;
+    //lo manda al reducer y el reducer lo manda al estado
+    dispatch(clientsLoaded(body));
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-        //lo manda al reducer y el reducer lo manda al estado
-        dispatch(clientsLoaded(clients));
-        dispatch(numeroPaginas(paginasTotales));
-      }
-      const resp = await fetchConToken(`clientes/clientes${page}`);
+export const getClientsByPage = (page) => async (dispatch) => {
+  console.log(page);
+  try {
+    const resp = await fetchConToken(`clientes/clientes?page=${page}`);
+    const body = await resp.json();
+    const clients = prepareDates(body.data);
+
+    //lo manda al reducer y el reducer lo manda al estado
+    dispatch(clientsLoaded(body));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+//traer todos los clientes de db y busca por nombre
+export const startGetClients = (nombre) => async (dispatch) => {
+  try {
+    if (nombre) {
+      const resp = await fetchConToken(
+        `clientes/clientes?searchQuery=${nombre}`
+      );
       const body = await resp.json();
 
-      const clients = prepareDates(body.clientes);
-      const paginasTotales = body.totalPages;
+      //const clients = prepareDates(body);
 
       //lo manda al reducer y el reducer lo manda al estado
-      dispatch(clientsLoaded(clients));
-      dispatch(numeroPaginas(paginasTotales));
-    } catch (error) {
-      console.log(error);
+      dispatch(clientsLoaded(body));
+    } else {
+      const resp = await fetchConToken("clientes/clientes");
+      const body = await resp.json();
+
+      //const clients = prepareDates(body.data);
+
+      //lo manda al reducer y el reducer lo manda al estado
+      dispatch(clientsLoaded(body));
     }
-  };
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 //recibe los datos y especifica adonde hay que mandarlos con el payload
 const clientsLoaded = (clients) => ({
   type: types.clientGetAll,
   payload: clients,
-});
-
-const numeroPaginas = (paginas) => ({
-  type: types.clientePaginas,
-  payload: paginas,
 });
 
 //accion para inicializar proceso de grabacion de nuevo cliente

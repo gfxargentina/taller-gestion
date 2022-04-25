@@ -19,7 +19,6 @@ export const types = {
   clientUpdated: "[client] client updated",
   //inicializa el proceso de eliminacion de un cliente
   clientDeleted: "[cliente] Client deleted",
-  clientePaginas: "[cliente] numero de paginas totales",
 
   aparatoActivo: "[aparato]El aparato activo",
   startNewAparato: "[aparato] Start add new aparato",

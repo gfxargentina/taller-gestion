@@ -5,6 +5,7 @@ const ClienteSchema = Schema({
     type: Number,
     required: true,
     unique: true,
+    default: 0,
   },
   nombreApellido: {
     type: String,
@@ -35,7 +36,7 @@ const ClienteSchema = Schema({
   },
 });
 
-ClienteSchema.index({ nombreApellido: "text" });
+//ClienteSchema.index({ nombreApellido: "text" });
 
 //quitar __v, _id de la vista JSON, esto no afecta a la bd
 ClienteSchema.method("toJSON", function () {

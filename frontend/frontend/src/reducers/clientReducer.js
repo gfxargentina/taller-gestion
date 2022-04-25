@@ -16,13 +16,9 @@ export const clientReducer = (state = initialState, action) => {
     case types.clientGetAll:
       return {
         ...state,
-        clients: [...action.payload],
-      };
-
-    case types.clientePaginas:
-      return {
-        ...state,
-        paginaTotales: action.payload,
+        clients: action.payload.data,
+        currentPage: action.payload.currentPage,
+        numberOfPages: action.payload.numberOfPages,
       };
 
     case types.clientUpdated:

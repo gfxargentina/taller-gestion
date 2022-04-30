@@ -40,51 +40,6 @@ export const Clientes = () => {
 
   const [page, setPage] = useState(1);
 
-  // const clientesArr2 = [
-  //   ...new Set(
-  //     Object.values(clientes).map((el) => {
-  //       return el;
-  //     })
-  //   ),
-  // ];
-
-  // const [termApellido, setTermApellido] = useState("");
-
-  // // const nombreyApellido = `?nombre=${termApellido}`;
-
-  // //paginacion
-  // const [pageNumber, setPageNumber] = useState(0);
-
-  // const clientsPerPage = 20;
-  // const pagesVisited = pageNumber * clientsPerPage;
-
-  // const displayClients = clientesArr2
-  //   .filter((cliente) => {
-  //     if (termApellido === "") {
-  //       return cliente;
-  //     }
-  //     if (cliente.nombreApellido.includes(termApellido)) {
-  //       console.log(cliente);
-  //       return cliente;
-  //     }
-  //     return false;
-  //   })
-  //   .slice(pagesVisited, pagesVisited + clientsPerPage);
-
-  // const pageCount = Math.ceil(
-  //   clientesArr2.filter((cliente) => {
-  //     if (termApellido === "") {
-  //       return cliente;
-  //     } else if (termApellido === cliente.nombreApellido) {
-  //       return cliente;
-  //     }
-  //     return false;
-  //   }).length / clientsPerPage
-  // );
-  // console.log(pageCount);
-
-  //const pageCount = Math.ceil(clientes.length / clientsPerPage)
-
   const changePage = ({ selected }) => {
     setPage(selected + 1);
   };

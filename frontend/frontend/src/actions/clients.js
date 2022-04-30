@@ -1,6 +1,6 @@
 import { types } from "../types/types";
 import { fetchConToken } from "../helpers/fetch";
-import { prepareDates } from "../helpers/prepareDates";
+//import { prepareDates } from "../helpers/prepareDates";
 import Swal from "sweetalert2";
 
 //establecer el cliente activo
@@ -14,7 +14,7 @@ export const getClientByDni = (dni) => async (dispatch) => {
   try {
     const resp = await fetchConToken(`clientes/clientes?numeroDni=${dni}`);
     const body = await resp.json();
-    const clients = prepareDates(body.data);
+    //const clients = prepareDates(body.data);
 
     //lo manda al reducer y el reducer lo manda al estado
     dispatch(clientsLoaded(body));
@@ -28,7 +28,7 @@ export const getClientsByPage = (page) => async (dispatch) => {
   try {
     const resp = await fetchConToken(`clientes/clientes?page=${page}`);
     const body = await resp.json();
-    const clients = prepareDates(body.data);
+    //const clients = prepareDates(body.data);
 
     //lo manda al reducer y el reducer lo manda al estado
     dispatch(clientsLoaded(body));

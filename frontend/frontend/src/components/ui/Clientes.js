@@ -14,21 +14,6 @@ import { ClientModal } from "../taller/ClientModal";
 import { startGetAparatos } from "../../actions/aparatos";
 import Swal from "sweetalert2";
 import ReactPaginate from "react-paginate";
-//buscar cliente por DNI
-// function searchTerm(term) {
-//   return function (x) {
-//     return x.dni?.toString().includes(term);
-//   };
-// }
-
-// //buscar cliente por apellido
-// function searchTerm2(termApellido) {
-//   return function (x) {
-//     return (
-//       x.nombreApellido?.toLowerCase().includes(termApellido) || !termApellido
-//     );
-//   };
-// }
 
 export const Clientes = () => {
   const dispatch = useDispatch();
@@ -48,7 +33,6 @@ export const Clientes = () => {
     e.preventDefault();
 
     if (e.target.value.length > 6) {
-      //setDni(e.target.value);
       setTimeout(() => {
         setDni(e.target.value);
       }, 500);
@@ -64,8 +48,6 @@ export const Clientes = () => {
       }, 500);
     }
   };
-
-  //const debouncedQuery = useDebounce(input, 1000);
 
   useEffect(() => {
     if (searchName) {

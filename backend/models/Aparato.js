@@ -23,6 +23,7 @@ const AparatoSchema = Schema({
   tecnico: {
     type: String,
     enum: ["JESUS", "ALEJANDRO", "BRUNO"],
+    default: "JESUS",
   },
   observaciones: {
     type: String,

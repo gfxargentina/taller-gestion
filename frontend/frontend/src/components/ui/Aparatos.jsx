@@ -21,8 +21,7 @@ export const GetAllAparatos = () => {
   //     state.clientes.clients.find((client) => client.id === id)
   //   );
 
-  const [queryEstadoAparato, setQueryEstadoAparato] = useState(aparatos);
-  const [queryTecnico, setQueryTecnico] = useState([]);
+  const [aparatosFiltro, setAparatosFiltro] = useState([]);
 
   const detalleAparato = (e) => {
     //console.log(e);
@@ -55,30 +54,24 @@ export const GetAllAparatos = () => {
     });
   };
 
-  // const filtroAparatos = (e) => {
-  //   const filtro = e.target.value;
-  //   setAparatoFiltro({
-  //     [e.target.name]: filtro,
-  //   });
-  // };
-
-  const handleSearchEstado = (e) => {
-    const query = e.target.value;
-    // const estadoFilter = aparatos.filter((aparato) => {
-    //   return aparato.estado.includes(query);
-    // });
-    setQueryEstadoAparato(query);
+  //devuelve el estado o el tecnico, a cada Select input se lo pone name:'' , para diferenciar cada input
+  const filtroAparatos = (e) => {
+    const filtro = e.target.value;
+    setAparatosFiltro({
+      [e.target.name]: filtro,
+    });
   };
 
-  const handleTecnico = (e) => {
-    const query = e.target.value;
-
-    // const tecnicoFilter = aparatos.filter((aparato) => {
-    //   return aparato.tecnico.includes(query);
-    // });
-
-    setQueryTecnico(query);
-  };
+  //con el  &&(AND)pasan las 2 condiciones para que el filtro funcione bien
+  const filtro =
+    !aparatosFiltro.estado && !aparatosFiltro.tecnico
+      ? aparatos
+      : aparatos.filter(
+          (aparato) =>
+            //con el ||(OR) solo 1 de las condiciones pasa
+            aparato.estado === aparatosFiltro.estado ||
+            aparato.tecnico === aparatosFiltro.tecnico
+        );
 
   return (
     <>
@@ -95,15 +88,13 @@ export const GetAllAparatos = () => {
                     <div class="mb-3 xl:w-96">
                       <select
                         name="estado"
-                        onChange={(e) => handleSearchEstado(e)}
+                        onChange={(e) => filtroAparatos(e)}
                         className="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700
                                   bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300                                 rounded
                                   transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                         aria-label="Default select example"
                       >
-                        <option selected value="">
-                          Elija Estado del Aparato
-                        </option>
+                        <option defaultValue>Elija Estado del Aparato</option>
                         <option value="SIN REVISAR">Sin Revisar</option>
                         <option value="REVISADO">Revisado</option>
                         <option value="TERMINADO">Terminado</option>
@@ -120,7 +111,7 @@ export const GetAllAparatos = () => {
                     <div class="mb-3 xl:w-96">
                       <select
                         name="tecnico"
-                        onChange={(e) => handleTecnico(e)}
+                        onChange={(e) => filtroAparatos(e)}
                         className="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700
                                   bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300                                 rounded
                                   transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
@@ -177,87 +168,77 @@ export const GetAllAparatos = () => {
                     <tbody className="bg-white  divide-y divide-gray-300">
                       {/* el ? se usa para que cuando llame a la api no de undefined,
                          porque el componente se carga primero y los datos todavia no estan listos */}
-                      {aparatos
-                        ?.filter(
-                          (aparato) =>
-                            aparato.tecnico === queryTecnico ||
-                            aparato.estado === queryEstadoAparato
-                        )
-                        .map((aparato) => (
-                          <tr
-                            key={aparato.id}
-                            className={
-                              aparato.estado === "SIN REVISAR"
-                                ? "bg-red-700"
-                                : "" || aparato.estado === "REVISADO"
-                                ? "bg-yellow-500"
-                                : "" || aparato.estado === "TERMINADO"
-                                ? "bg-orange-500"
-                                : "" || aparato.estado === "ENTREGADO"
-                                ? "bg-green-600"
-                                : "" || aparato.estado === "DEVUELTO"
-                                ? "bg-stone-700"
-                                : ""
-                            }
-                          >
-                            <td className="px-6 py-4 whitespace-nowrap">
-                              <div className="flex items-center">
-                                <div className="ml-6">
-                                  <div className="text-lg font-medium text-white">
-                                    {aparato.aparato}
-                                  </div>
-                                  {/* <div className="text-base text-gray-500">person.email</div> */}
+                      {filtro?.map((aparato) => (
+                        <tr
+                          key={aparato.id}
+                          className={
+                            aparato.estado === "SIN REVISAR"
+                              ? "bg-red-700"
+                              : "" || aparato.estado === "REVISADO"
+                              ? "bg-yellow-500"
+                              : "" || aparato.estado === "TERMINADO"
+                              ? "bg-orange-500"
+                              : "" || aparato.estado === "ENTREGADO"
+                              ? "bg-green-600"
+                              : "" || aparato.estado === "DEVUELTO"
+                              ? "bg-stone-700"
+                              : ""
+                          }
+                        >
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <div className="flex items-center">
+                              <div className="ml-6">
+                                <div className="text-lg font-medium text-white">
+                                  {aparato.aparato}
                                 </div>
+                                {/* <div className="text-base text-gray-500">person.email</div> */}
                               </div>
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                              <div className="text-lg font-medium text-white">
-                                {aparato.estado}
-                              </div>
-                              {/* <div className="text-base text-gray-500">person.telefono</div> */}
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                              <span className="px-4 inline-flex text-base leading-8 font-semibold rounded-full bg-green-100 text-green-800">
-                                {dayjs(aparato.fechaEntrada).format(
-                                  "DD/MM/YYYY"
-                                )}
-                              </span>
-                            </td>
-                            <td className="px-3 py-3 whitespace-nowrap text-lg font-medium text-white">
-                              {aparato.fechaSalida
-                                ? dayjs(aparato.fechaSalida).format(
-                                    "DD/MM/YYYY"
-                                  )
-                                : ""}
-                            </td>
-                            <td className="px-3 py-3 whitespace-nowrap text-center text-lg font-medium text-white">
-                              {" "}
-                              ${aparato.precio}{" "}
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                              <Link to="/detalle-aparato2">
-                                <button
-                                  onClick={() => detalleAparato(aparato.id)}
-                                  name={[aparato.id]}
-                                  class="h-10 px-5 text-white transition-colors duration-150 border border-white 
+                            </div>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <div className="text-lg font-medium text-white">
+                              {aparato.estado}
+                            </div>
+                            {/* <div className="text-base text-gray-500">person.telefono</div> */}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <span className="px-4 inline-flex text-base leading-8 font-semibold rounded-full bg-green-100 text-green-800">
+                              {dayjs(aparato.fechaEntrada).format("DD/MM/YYYY")}
+                            </span>
+                          </td>
+                          <td className="px-3 py-3 whitespace-nowrap text-lg font-medium text-white">
+                            {aparato.fechaSalida
+                              ? dayjs(aparato.fechaSalida).format("DD/MM/YYYY")
+                              : ""}
+                          </td>
+                          <td className="px-3 py-3 whitespace-nowrap text-center text-lg font-medium text-white">
+                            {" "}
+                            ${aparato.precio}{" "}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                            <Link to="/detalle-aparato2">
+                              <button
+                                onClick={() => detalleAparato(aparato.id)}
+                                name={[aparato.id]}
+                                class="h-10 px-5 text-white transition-colors duration-150 border border-white 
                               rounded-lg focus:shadow-outline hover:bg-indigo-500 hover:text-indigo-100"
-                                >
-                                  Detalle
-                                </button>
-                              </Link>
+                              >
+                                Detalle
+                              </button>
+                            </Link>
 
-                              <Link to="/editar-aparato2">
-                                <button
-                                  onClick={() => editarAparato(aparato.id)}
-                                  name={[aparato._id]}
-                                  class="h-10 ml-5 px-5  text-white transition-colors duration-150 border border-white 
+                            <Link to="/editar-aparato2">
+                              <button
+                                onClick={() => editarAparato(aparato.id)}
+                                name={[aparato._id]}
+                                class="h-10 ml-5 px-5  text-white transition-colors duration-150 border border-white 
                               rounded-lg focus:shadow-outline hover:bg-green-500 hover:text-indigo-100"
-                                >
-                                  Editar
-                                </button>
-                              </Link>
+                              >
+                                Editar
+                              </button>
+                            </Link>
 
-                              {/* <button
+                            {/* <button
                               onClick={eliminarAparato}
                               name={[aparato._id]}
                               class="h-10 ml-5 px-5 text-white transition-colors duration-150 border border-white 
@@ -265,9 +246,9 @@ export const GetAllAparatos = () => {
                             >
                               Eliminar
                             </button> */}
-                            </td>
-                          </tr>
-                        ))}
+                          </td>
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                 </div>

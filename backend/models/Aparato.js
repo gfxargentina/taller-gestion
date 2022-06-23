@@ -20,6 +20,10 @@ const AparatoSchema = Schema({
   precio: {
     type: String,
   },
+  tecnico: {
+    type: String,
+    enum: ["JESUS", "ALEJANDRO", "BRUNO"],
+  },
   observaciones: {
     type: String,
   },

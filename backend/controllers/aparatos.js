@@ -4,9 +4,6 @@ const Cliente = require("../models/Cliente");
 
 //ingresar nuevo aparato
 const nuevoAparato = async (req, res = response) => {
-  //console.log(req.body)
-  //console.log(res)
-
   const aparato = new Aparato(req.body);
 
   try {
@@ -53,6 +50,7 @@ const getAparatos = async (req, res = response) => {
 
 //Actualizar Aparato
 const actualizarAparato = async (req, res = response) => {
+  console.log(req.body);
   //id del aparato a actualizar
   const aparatoId = req.params.id;
 

@@ -45,6 +45,7 @@ export const EditarAparato = () => {
     aparato: aparatoModificar.aparato,
     falla: aparatoModificar.falla,
     presupuesto: aparatoModificar.presupuesto,
+    tecnico: aparatoModificar.tecnico,
     precio: aparatoModificar.precio,
     estado: aparatoModificar.estado,
     garantia: aparatoModificar.garantia,
@@ -61,6 +62,7 @@ export const EditarAparato = () => {
     estado,
     garantia,
     observaciones,
+    tecnico,
   } = editAparato;
 
   //DatePicker
@@ -242,6 +244,24 @@ export const EditarAparato = () => {
                   <option value="TERMINADO">TERMINADO</option>
                   <option value="ENTREGADO">ENTREGADO</option>
                   <option value="DEVUELTO">DEVUELTO</option>
+                </select>
+              </div>
+
+              <div class="mt-4">
+                <label className="block text-gray-700">Tecnico</label>
+                <select
+                  type="text"
+                  name="tecnico"
+                  value={tecnico}
+                  onChange={handleEditAparatoInput}
+                  placeholder="Ingrese la garantia"
+                  class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
+                        focus:bg-white focus:outline-none"
+                  required
+                >
+                  <option value="JESUS">JESUS</option>
+                  <option value="ALEJANDRO">ALEJANDRO</option>
+                  <option value="BRUNO">BRUNO</option>
                 </select>
               </div>
 

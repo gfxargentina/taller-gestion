@@ -76,7 +76,7 @@ const getClientes = async (req, res) => {
         .skip(startIndex)
         .populate(
           "aparatos",
-          "fechaEntrada fechaSalida aparato falla presupuesto observaciones precio estado garantia"
+          "fechaEntrada fechaSalida aparato falla presupuesto observaciones precio estado garantia tecnico"
         );
       res.status(200).json({
         data: clients,
@@ -91,7 +91,7 @@ const getClientes = async (req, res) => {
         .skip(startIndex)
         .populate(
           "aparatos",
-          "fechaEntrada fechaSalida aparato falla presupuesto observaciones precio estado garantia"
+          "fechaEntrada fechaSalida aparato falla presupuesto observaciones precio estado garantia tecnico"
         );
       res.json({
         data: clients,
@@ -105,7 +105,7 @@ const getClientes = async (req, res) => {
         .skip(startIndex)
         .populate(
           "aparatos",
-          "fechaEntrada fechaSalida aparato falla presupuesto observaciones precio estado garantia"
+          "fechaEntrada fechaSalida aparato falla presupuesto observaciones precio estado garantia tecnico"
         );
       res.json({
         data: clients,

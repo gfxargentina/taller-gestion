@@ -54,10 +54,20 @@ export const AparatoDetalle = () => {
                 {aparato.estado}
               </div>
             </div>
+
+            <div className="flex flex-col ">
+              <label className="text-center font-bold">Tecnico</label>
+              <div className="bg-white shadow-lg rounded-md p-2 text-center border border-blue-500">
+                {aparato.tecnico}
+              </div>
+            </div>
+
             <div className="flex flex-col">
               <label className="col-auto font-bold">Fecha de Retirado</label>
               <div className="bg-white shadow-lg rounded-md p-2 border border-blue-500">
-                {dayjs(aparato.fechaSalida).format("DD/MM/YYYY")}
+                {aparato.fechaSalida
+                  ? dayjs(aparato.fechaSalida).format("DD/MM/YYYY")
+                  : "No Fue retirado"}
               </div>
             </div>
 

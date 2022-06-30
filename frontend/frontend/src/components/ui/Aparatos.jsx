@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 import { ClientModal } from "../taller/ClientModal";
 import { NoHayAparatos } from "./NoHayAparatos";
-import { aparatoActivo, deleteAparato } from "../../actions/aparatos";
-import Swal from "sweetalert2";
-import { EditarAparato2 } from "../taller/EditarAparato2";
+import { aparatoActivo } from "../../actions/aparatos";
+//import Swal from "sweetalert2";
+//import { EditarAparato2 } from "../taller/EditarAparato2";
 
 export const GetAllAparatos = () => {
   const dispatch = useDispatch();
@@ -33,26 +33,26 @@ export const GetAllAparatos = () => {
     dispatch(aparatoActivo(e));
   };
 
-  const eliminarAparato = (e) => {
-    Swal.fire({
-      title: "Esta seguro de borrar este aparato?",
-      text: "Esta acción NO podra ser revertida",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      cancelButtonText: "Cancelar",
-      confirmButtonText: "Si, Borrar Aparato",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        dispatch(deleteAparato(e.target.name));
-        Swal.fire({
-          title: "El Aparato fue Borrado de la base de datos!",
-          icon: "success",
-        });
-      }
-    });
-  };
+  // const eliminarAparato = (e) => {
+  //   Swal.fire({
+  //     title: "Esta seguro de borrar este aparato?",
+  //     text: "Esta acción NO podra ser revertida",
+  //     icon: "warning",
+  //     showCancelButton: true,
+  //     confirmButtonColor: "#3085d6",
+  //     cancelButtonColor: "#d33",
+  //     cancelButtonText: "Cancelar",
+  //     confirmButtonText: "Si, Borrar Aparato",
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       dispatch(deleteAparato(e.target.name));
+  //       Swal.fire({
+  //         title: "El Aparato fue Borrado de la base de datos!",
+  //         icon: "success",
+  //       });
+  //     }
+  //   });
+  // };
 
   //devuelve el estado o el tecnico, a cada Select input se lo pone name:'' , para diferenciar cada input
   const filtroAparatos = (e) => {
@@ -188,15 +188,18 @@ export const GetAllAparatos = () => {
                           <td className="px-6 py-4 whitespace-nowrap">
                             <div className="flex items-center">
                               <div className="ml-6">
-                                <div className="text-lg font-medium text-white">
+                                <div className="text-lg font-medium text-white drop-shadow-xl ">
                                   {aparato.aparato}
                                 </div>
-                                {/* <div className="text-base text-gray-500">person.email</div> */}
+
+                                <div className="text-base font-bold text-white drop-shadow-lg">
+                                  {aparato.cliente.nombreApellido}
+                                </div>
                               </div>
                             </div>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="text-lg font-medium text-white">
+                            <div className="text-lg font-medium text-white drop-shadow-lg">
                               {aparato.estado}
                             </div>
                             {/* <div className="text-base text-gray-500">person.telefono</div> */}
@@ -211,9 +214,8 @@ export const GetAllAparatos = () => {
                               ? dayjs(aparato.fechaSalida).format("DD/MM/YYYY")
                               : ""}
                           </td>
-                          <td className="px-3 py-3 whitespace-nowrap text-center text-lg font-medium text-white">
-                            {" "}
-                            ${aparato.precio}{" "}
+                          <td className="px-3 py-3 whitespace-nowrap text-center text-lg font-medium text-white drop-shadow-lg">
+                            ${aparato.precio}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                             <Link to="/detalle-aparato2">
@@ -221,7 +223,7 @@ export const GetAllAparatos = () => {
                                 onClick={() => detalleAparato(aparato.id)}
                                 name={[aparato.id]}
                                 class="h-10 px-5 text-white transition-colors duration-150 border border-white 
-                              rounded-lg focus:shadow-outline hover:bg-indigo-500 hover:text-indigo-100"
+                              rounded-lg focus:shadow-outline hover:bg-indigo-500 hover:text-indigo-100 drop-shadow-lg"
                               >
                                 Detalle
                               </button>
@@ -232,7 +234,7 @@ export const GetAllAparatos = () => {
                                 onClick={() => editarAparato(aparato.id)}
                                 name={[aparato._id]}
                                 class="h-10 ml-5 px-5  text-white transition-colors duration-150 border border-white 
-                              rounded-lg focus:shadow-outline hover:bg-green-500 hover:text-indigo-100"
+                              rounded-lg focus:shadow-outline hover:bg-green-500 hover:text-indigo-100 drop-shadow-lg "
                               >
                                 Editar
                               </button>

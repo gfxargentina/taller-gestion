@@ -1,16 +1,28 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Swal from "sweetalert2";
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import Swal from 'sweetalert2';
 //import DateTimePicker from 'react-datetime-picker';
 //import moment from 'moment';
-import { useForm } from "../../hooks/useForm";
-import { useHistory } from "react-router-dom";
-import { startEditAparato } from "../../actions/aparatos";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import dayjs from "dayjs";
+import { useForm } from '../../hooks/useForm';
+import { useHistory } from 'react-router-dom';
+import { startEditAparato } from '../../actions/aparatos';
+import dayjs from 'dayjs';
 
-//   const startDate = moment();
+import Select from 'react-select';
+import DatePicker, { registerLocale } from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import es from 'date-fns/locale/es';
+registerLocale('es-ES', es);
+
+const options = [
+  { value: 'sinAccesorios', label: 'Sin Accesorios' },
+  { value: 'controlRemoto', label: 'Con Control Remoto' },
+  { value: 'base', label: 'Con Base' },
+  { value: 'patas', label: 'Con Patas' },
+  { value: 'cable220', label: 'Con Cable 220v' },
+  { value: 'cableRca', label: 'Con Cable RCA' },
+  { value: 'fuente', label: 'Con Fuente 220v' },
+];
 
 export const EditarAparato2 = () => {
   const dispatch = useDispatch();
@@ -56,13 +68,18 @@ export const EditarAparato2 = () => {
   } = editAparato;
 
   //DatePicker
-  const [selectedDate, setSelectedDate] = useState("");
-  const [retirado, setRetirado] = useState("");
+  const [selectedDate, setSelectedDate] = useState('');
+  const [retirado, setRetirado] = useState('');
 
   const datePicker = (date) => {
     setSelectedDate(date);
     //console.log(date)
     editAparato.fechaEntrada = `${date}`;
+  };
+
+  //accesorios de aparatos
+  const handleSelect = (e) => {
+    editAparato.accesorios = e;
   };
 
   const aparatoRetirado = (date) => {
@@ -77,12 +94,12 @@ export const EditarAparato2 = () => {
     try {
       dispatch(startEditAparato(editAparato));
       Swal.fire({
-        icon: "success",
-        title: "OK",
-        text: "Se Actualizo el Aparato",
+        icon: 'success',
+        title: 'OK',
+        text: 'Se Actualizo el Aparato',
       });
 
-      history.push("/");
+      history.push('/');
     } catch (error) {
       console.log(error);
     }
@@ -114,10 +131,11 @@ export const EditarAparato2 = () => {
               <div className="mb-4">
                 <label className="block text-gray-700">Fecha de Entrada</label>
                 <DatePicker
+                  locale="es-ES"
                   selected={selectedDate}
                   onChange={datePicker}
                   dateFormat="dd/MM/yyyy"
-                  placeholderText={dayjs(fechaEntrada).format("DD/MM/YYYY")}
+                  placeholderText={dayjs(fechaEntrada).format('DD/MM/YYYY')}
                 />
                 {/* <input 
                         type="text" 
@@ -139,13 +157,14 @@ export const EditarAparato2 = () => {
               <div className="mb-4">
                 <label className="block text-gray-700">Fecha de Salida</label>
                 <DatePicker
+                  locale="es-ES"
                   selected={retirado}
                   onChange={aparatoRetirado}
                   dateFormat="dd/MM/yyyy"
                   placeholderText={
                     fechaSalida
-                      ? dayjs(fechaSalida).format("DD/MM/YYYY")
-                      : "Ingrese Fecha"
+                      ? dayjs(fechaSalida).format('DD/MM/YYYY')
+                      : 'Ingrese Fecha'
                   }
                 />
 
@@ -269,6 +288,19 @@ export const EditarAparato2 = () => {
                   required
                 />
               </div>
+
+              <label className="block text-gray-700 mb-2 mt-2">
+                Accesorios
+              </label>
+              <Select
+                isMulti
+                defaultValue={aparatoModificar.accesorios.map((accesorio) => ({
+                  label: accesorio.label,
+                  value: accesorio.value,
+                }))}
+                options={options}
+                onChange={handleSelect}
+              />
 
               <div class="mt-4">
                 <label className="block text-gray-700">Observaciones</label>

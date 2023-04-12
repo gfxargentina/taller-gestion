@@ -1,7 +1,7 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import dayjs from "dayjs";
-import { useHistory } from "react-router";
+import React from 'react';
+import { useSelector } from 'react-redux';
+import dayjs from 'dayjs';
+import { useHistory } from 'react-router';
 
 export const AparatoDetalle = () => {
   const history = useHistory();
@@ -31,11 +31,11 @@ export const AparatoDetalle = () => {
       <div className="flex w-full h-screen items-start justify-center p-5">
         <div className="w-full max-w-6xl">
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-2">
-            <div className="flex flex-col ">
+            <div className="flex flex-col">
               <label className="text-center font-bold">Fecha de Entrada</label>
               {/* <input type="text" className="rounded-md p-2" value={ dayjs(aparato.fechaEntrada).format("DD/MM/YYYY") } /> */}
               <div className="flex-none shadow-lg  bg-white rounded-md p-2 text-center border border-blue-500">
-                {dayjs(aparato.fechaEntrada).format("DD/MM/YYYY")}
+                {dayjs(aparato.fechaEntrada).format('DD/MM/YYYY')}
               </div>
             </div>
             <div className="flex flex-col ">
@@ -61,36 +61,47 @@ export const AparatoDetalle = () => {
               <label className="col-auto font-bold">Fecha de Retirado</label>
               <div className="bg-white shadow-lg rounded-md p-2 border border-blue-500">
                 {aparato.fechaSalida
-                  ? dayjs(aparato.fechaSalida).format("DD/MM/YYYY")
-                  : "No Fue retirado"}
+                  ? dayjs(aparato.fechaSalida).format('DD/MM/YYYY')
+                  : 'No Fue retirado'}
               </div>
             </div>
+
             <div className="flex flex-col md:col-span-2 ">
               <label className="col-auto font-bold">Falla</label>
               <div className="bg-white shadow-lg rounded-md p-2 h-24 w-auto border border-blue-500">
-                {" "}
-                {aparato.falla}{" "}
+                {aparato.falla}
               </div>
             </div>
+
+            <div className="flex flex-col md:col-span-2 ">
+              <label className="font-bold">accesorios</label>
+              <div className="bg-white shadow-lg rounded-md p-2 h-24 w-auto border border-blue-500">
+                {aparato.accesorios.map((accesorio) => {
+                  const accesorios = accesorio.label;
+                  return accesorios + ' - ';
+                })}
+              </div>
+            </div>
+
             <div className="flex flex-col md:col-span-2 ">
               <label className="font-bold">Observaciones</label>
               <div className="bg-white shadow-lg rounded-md p-2 h-24 w-auto border border-blue-500">
-                {" "}
-                {aparato.observaciones}{" "}
+                {' '}
+                {aparato.observaciones}{' '}
               </div>
             </div>
             <div className="flex flex-col md:col-span-2 ">
               <label className="col-auto font-bold">Presupuesto</label>
               <div className="bg-white shadow-lg rounded-md p-2 h-24 w-auto border border-blue-500">
-                {" "}
-                {aparato.presupuesto}{" "}
+                {' '}
+                {aparato.presupuesto}{' '}
               </div>
             </div>
             <div className="flex flex-col md:col-span-1">
               <label className="col-auto font-bold">Precio</label>
               <div className="bg-white shadow-lg rounded-md p-2 w-24 border border-blue-500">
-                {" "}
-                {aparato.precio}{" "}
+                {' '}
+                {aparato.precio}{' '}
               </div>
             </div>
             <button

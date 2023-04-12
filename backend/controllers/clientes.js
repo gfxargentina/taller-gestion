@@ -1,5 +1,5 @@
-const { response } = require("express");
-const Cliente = require("../models/Cliente");
+const { response } = require('express');
+const Cliente = require('../models/Cliente');
 
 //Trae todos los clientes, manejar la paginacion en el cliente
 // const getClientes = async (req, res = response) => {
@@ -69,14 +69,14 @@ const getClientes = async (req, res) => {
     const total = await Cliente.countDocuments({});
 
     if (searchQuery) {
-      const nombre = new RegExp(searchQuery, "i");
+      const nombre = new RegExp(searchQuery, 'i');
       const clients = await Cliente.find({ nombreApellido: nombre })
-        .sort([["fecha", -1]])
+        .sort([['fecha', -1]])
         .limit(LIMIT)
         .skip(startIndex)
         .populate(
-          "aparatos",
-          "fechaEntrada fechaSalida aparato falla presupuesto observaciones precio estado garantia tecnico"
+          'aparatos',
+          'fechaEntrada fechaSalida aparato falla presupuesto observaciones accesorios precio estado garantia tecnico'
         );
       res.status(200).json({
         data: clients,
@@ -86,12 +86,12 @@ const getClientes = async (req, res) => {
     } else if (numeroDni) {
       //const dniReg = new RegExp(numeroDni, "i");
       const clients = await Cliente.find({ dni: parseInt(numeroDni) })
-        .sort([["fecha", -1]])
+        .sort([['fecha', -1]])
         .limit(LIMIT)
         .skip(startIndex)
         .populate(
-          "aparatos",
-          "fechaEntrada fechaSalida aparato falla presupuesto observaciones precio estado garantia tecnico"
+          'aparatos',
+          'fechaEntrada fechaSalida aparato falla presupuesto observaciones accesorios precio estado garantia tecnico'
         );
       res.json({
         data: clients,
@@ -100,12 +100,12 @@ const getClientes = async (req, res) => {
       });
     } else {
       const clients = await Cliente.find({})
-        .sort([["fecha", -1]])
+        .sort([['fecha', -1]])
         .limit(LIMIT)
         .skip(startIndex)
         .populate(
-          "aparatos",
-          "fechaEntrada fechaSalida aparato falla presupuesto observaciones precio estado garantia tecnico"
+          'aparatos',
+          'fechaEntrada fechaSalida aparato falla presupuesto accesorios observaciones precio estado garantia tecnico'
         );
       res.json({
         data: clients,
@@ -230,14 +230,14 @@ const crearCliente = async (req, res = response) => {
 
     res.status(201).json({
       ok: true,
-      msg: "Cliente guardado en la db",
+      msg: 'Cliente guardado en la db',
       cliente: clienteGuardado,
     });
   } catch (error) {
     console.log(error);
     res.status(500).json({
       ok: false,
-      msg: "Hable con el administrador",
+      msg: 'Hable con el administrador',
     });
   }
 };
@@ -254,14 +254,14 @@ const actualizarCliente = async (req, res = response) => {
     if (!cliente) {
       res.status(404).json({
         ok: false,
-        msg: "No existe ningun cliente con ese id",
+        msg: 'No existe ningun cliente con ese id',
       });
     }
     //verificar que sea el mismo usuario el que quiere realizar los cambios
     if (cliente.user.toString() !== uid) {
       return res.status(401).json({
         ok: false,
-        msg: "No esta autorizado a editar este cliente",
+        msg: 'No esta autorizado a editar este cliente',
       });
     }
 
@@ -285,7 +285,7 @@ const actualizarCliente = async (req, res = response) => {
     console.log(error);
     res.status(500).json({
       ok: false,
-      msg: "Hable con el administrador",
+      msg: 'Hable con el administrador',
     });
   }
 };
@@ -302,14 +302,14 @@ const eliminarCliente = async (req, res = response) => {
     if (!cliente) {
       res.status(404).json({
         ok: false,
-        msg: "No existe ningun cliente con ese id",
+        msg: 'No existe ningun cliente con ese id',
       });
     }
     //verificar que sea el mismo usuario el que quiere realizar los cambios
     if (cliente.user.toString() !== uid) {
       return res.status(401).json({
         ok: false,
-        msg: "No esta autorizado a eliminar este cliente",
+        msg: 'No esta autorizado a eliminar este cliente',
       });
     }
 
@@ -317,13 +317,13 @@ const eliminarCliente = async (req, res = response) => {
     await Cliente.findByIdAndDelete(clienteId);
     res.json({
       ok: true,
-      msg: "Cliente eliminado",
+      msg: 'Cliente eliminado',
     });
   } catch (error) {
     console.log(error);
     res.status(500).json({
       ok: false,
-      msg: "Hable con el administrador",
+      msg: 'Hable con el administrador',
     });
   }
 };
